@@ -2,11 +2,11 @@
   "content": [
     {
       "content": null,
-      "created": "2024-12-02T09:47:51.713054Z",
+      "created": "2024-12-02T10:03:26.881364Z",
       "format": null,
       "hash": null,
       "hash_algorithm": null,
-      "last_modified": "2024-12-02T09:47:38.912950Z",
+      "last_modified": "2024-12-02T10:03:11.149623Z",
       "mimetype": "text/x-python",
       "name": "example.py",
       "path": "python_files/example.py",
@@ -15,11 +15,11 @@
       "writable": true
     }
   ],
-  "created": "2024-12-02T09:47:51.713054Z",
+  "created": "2024-12-02T10:03:26.881364Z",
   "format": "json",
   "hash": null,
   "hash_algorithm": null,
-  "last_modified": "2024-12-02T09:47:51.713054Z",
+  "last_modified": "2024-12-02T10:03:26.881364Z",
   "mimetype": null,
   "name": "python_files",
   "path": "python_files",
