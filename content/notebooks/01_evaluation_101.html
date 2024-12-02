@@ -457,8 +457,7 @@ this is a regression problem.</p>
 <p>Let’s visualize the relationship between these measurements:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;poster&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Can I predict penguins&#39; body mass?&quot;</span><span class="p">)</span>
@@ -466,7 +465,7 @@ this is a regression problem.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bc4dd4c0a752739a8ae185ecaeea29a0fdf5eb4c3381a9f30f243596755826cd.png" src="../../_images/bc4dd4c0a752739a8ae185ecaeea29a0fdf5eb4c3381a9f30f243596755826cd.png" />
+<img alt="../../_images/410227d9fce8f875649f80bd8954ea7c55c8bcb37649174d2eb124904d8a79e3.png" src="../../_images/410227d9fce8f875649f80bd8954ea7c55c8bcb37649174d2eb124904d8a79e3.png" />
 </div>
 </div>
 <p>The data shows a clear linear trend - longer flippers correlate with heavier penguins.
@@ -967,7 +966,18 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>Scikit-learn models store fitted parameters as attributes ending in underscore.
 Our linear model stores <code class="docutils literal notranslate"><span class="pre">coef_</span></code> and <code class="docutils literal notranslate"><span class="pre">intercept_</span></code>:</p>
-<p>model.coef_, model.intercept_</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[49.68556641]]), array([-5780.83135808]))
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="cross-validation-for-proper-model-evaluation">
 <h2>Cross-validation for proper model evaluation<a class="headerlink" href="#cross-validation-for-proper-model-evaluation" title="Link to this heading">#</a></h2>
@@ -1800,7 +1810,7 @@ the score distributions:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dcfc43a8186e27f75c12f32cf0017c735f9c6ceb40ae890523e47f029ffd989e.png" src="../../_images/dcfc43a8186e27f75c12f32cf0017c735f9c6ceb40ae890523e47f029ffd989e.png" />
+<img alt="../../_images/469b5e3fdc3fecccc37081775b7a1540776515ecfbe73d12f55b0ccb0ca12b08.png" src="../../_images/469b5e3fdc3fecccc37081775b7a1540776515ecfbe73d12f55b0ccb0ca12b08.png" />
 </div>
 </div>
 <p>The similar performance on training and testing sets with low variation indicates
@@ -1818,17 +1828,20 @@ the differences from our previous analysis.</p>
 </section>
 <section id="baseline-model-comparison">
 <h2>Baseline model comparison<a class="headerlink" href="#baseline-model-comparison" title="Link to this heading">#</a></h2>
+<p>It is common to compare the performance of a new model against simple models.
+These baseline models do not necessarily have to learn anything from the data.
+But they provide a reference to compare against.</p>
 <p><strong>EXERCISE</strong></p>
-<p>Compare your linear model against these baselines:</p>
+<p>Compare your linear model against such a baseline:</p>
 <ol class="arabic simple">
 <li><p>Use cross-validation to get 30+ score estimates</p></li>
-<li><p>Try a <code class="docutils literal notranslate"><span class="pre">DummyRegressor</span></code> that predicts training set mean</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">permutation_test_score</span></code> to estimate random model performance</p></li>
+<li><p>Try a <code class="docutils literal notranslate"><span class="pre">DummyRegressor</span></code> that predicts the mean target value of the training set</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">permutation_test_score</span></code> function to estimate the performance of a random model</p></li>
 <li><p>Plot test score distributions for all three models</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedKFold</span><span class="p">(</span><span class="n">n_repeats</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write your code here.</span>
 </pre></div>
 </div>
 </div>
