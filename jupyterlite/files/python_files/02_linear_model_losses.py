@@ -7,15 +7,21 @@
 # body mass.
 
 # %%
+# When using JupyterLite, you will need to uncomment and install the `skrub` package.
+# %pip install skrub
+import matplotlib.pyplot as plt
+import skrub
+skrub.patch_display()  # make nice display for pandas tables
+
+# %%
 import pandas as pd
 
 data = pd.read_csv("../datasets/penguins_regression.csv")
-data.head()
+data
 
 # %%
-from matplotlib import pyplot as plt
-
-_ = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
+data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
+plt.show()
 
 # %% [markdown]
 #
@@ -35,13 +41,13 @@ from sklearn.linear_model import LinearRegression
 
 model = LinearRegression()
 model.fit(X, y)
-y_pred = model.predict(X)
+predicted_target = model.predict(X)
 
 # %%
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
-ax.plot(X, y_pred, label=model.__class__.__name__, color="tab:orange", linewidth=4)
-_ = ax.legend()
-
+ax.plot(X, predicted_target, label=model.__class__.__name__, color="tab:orange", linewidth=4)
+ax.legend()
+plt.show()
 # %% [markdown]
 #
 # The linear regression model minimizes the error between true and predicted targets.
@@ -61,8 +67,8 @@ _ = ax.legend()
 # Let's visualize this loss function:
 
 # %%
-def se_loss(y_true, y_pred):
-    loss = (y_true - y_pred) ** 2
+def se_loss(true_target, predicted_target):
+    loss = (true_target - predicted_target) ** 2
     return loss
 
 
@@ -74,7 +80,8 @@ xx = np.linspace(xmin, xmax, 100)
 
 # %%
 plt.plot(xx, se_loss(0, xx), label="SE loss")
-_ = plt.legend()
+plt.legend()
+plt.show()
 
 # %% [markdown]
 #
@@ -109,12 +116,13 @@ sample_weight = np.ones_like(y)
 sample_weight[-1] = 10
 model = HuberRegressor()
 model.fit(X, y, sample_weight=sample_weight)
-y_pred = model.predict(X)
+predicted_target = model.predict(X)
 # -
 
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
-ax.plot(X, y_pred, label=model.__class__.__name__, color="black", linewidth=4)
-_ = ax.legend()
+ax.plot(X, predicted_target, label=model.__class__.__name__, color="black", linewidth=4)
+plt.legend()
+plt.show()
 
 # %% [markdown]
 #
@@ -147,13 +155,14 @@ from sklearn.linear_model import QuantileRegressor
 
 model = QuantileRegressor(quantile=0.5)
 model.fit(X, y, sample_weight=sample_weight)
-y_pred = model.predict(X)
+predicted_target = model.predict(X)
 
 
 # %%
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
-ax.plot(X, y_pred, label=model.__class__.__name__, color="black", linewidth=4)
-_ = ax.legend()
+ax.plot(X, predicted_target, label=model.__class__.__name__, color="black", linewidth=4)
+ax.legend()
+plt.show()
 
 # %% [markdown]
 #
@@ -162,40 +171,41 @@ _ = ax.legend()
 # %%
 model = QuantileRegressor(quantile=0.5, solver="highs")
 model.fit(X, y, sample_weight=sample_weight)
-y_pred_median = model.predict(X)
+predicted_target_median = model.predict(X)
 
 model.set_params(quantile=0.90)
 model.fit(X, y, sample_weight=sample_weight)
-y_pred_90 = model.predict(X)
+predicted_target_90 = model.predict(X)
 
 model.set_params(quantile=0.10)
 model.fit(X, y, sample_weight=sample_weight)
-y_pred_10 = model.predict(X)
+predicted_target_10 = model.predict(X)
 
 # %%
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
 ax.plot(
     X,
-    y_pred_median,
+    predicted_target_median,
     label=f"{model.__class__.__name__} - median",
     color="black",
     linewidth=4,
 )
 ax.plot(
     X,
-    y_pred_90,
+    predicted_target_90,
     label=f"{model.__class__.__name__} - 90th percentile",
     color="tab:orange",
     linewidth=4,
 )
 ax.plot(
     X,
-    y_pred_10,
+    predicted_target_10,
     label=f"{model.__class__.__name__} - 10th percentile",
     color="tab:green",
     linewidth=4,
 )
-_ = ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+plt.show()
 
 # %% [markdown]
 #
