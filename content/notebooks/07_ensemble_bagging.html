@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Bagging-based estimator &#8212; Introduction to scikit-learn for the TRACES program</title>
+    <title>Bagged trees &#8212; Introduction to scikit-learn for the TRACES program</title>
   
   
   
@@ -65,6 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/notebooks/07_ensemble_bagging';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Boosted trees" href="08_ensemble_boosting.html" />
     <link rel="prev" title="Decision trees" href="06_tree_model.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,7 +184,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tree-based models</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="06_tree_model.html">Decision trees</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bagging-based estimator</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bagged trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_ensemble_boosting.html">Boosted trees</a></li>
 </ul>
 
     </div>
@@ -361,7 +363,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bagging-based estimator</h1>
+    <h1>Bagged trees</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -392,8 +394,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="bagging-based-estimator">
-<h1>Bagging-based estimator<a class="headerlink" href="#bagging-based-estimator" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="bagged-trees">
+<h1>Bagged trees<a class="headerlink" href="#bagged-trees" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># When using JupyterLite, uncomment and install the `skrub` package.</span>
@@ -458,11 +460,11 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 9, 17, 55, 17, 71, 70, 21,  6, 72, 27, 18,  1, 34, 47, 62, 49,  9,
-       43, 57, 74, 25,  1, 12, 50, 14, 27, 21, 73, 71, 58,  6, 11, 52, 24,
-       68, 20, 51,  9, 36, 74, 19, 24, 55, 62, 53, 17, 66, 55, 57, 60, 17,
-       41, 60, 58, 27, 16,  6,  9, 52, 41, 69, 38, 60, 31, 30, 74, 71, 55,
-        2, 41, 32, 52, 16, 61,  5])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([43,  6, 27, 73, 57, 68, 65, 27, 12, 20, 15, 64, 41, 68, 34, 45, 51,
+       52, 26,  2, 17,  7, 31,  6, 38, 30, 34,  5, 40, 15, 49, 23,  9, 60,
+       36, 31, 40, 53, 53, 46, 21, 64, 56, 32, 17, 71, 24,  8, 61, 24, 15,
+       13, 16, 70, 62, 36, 48, 47, 73,  8, 65, 27, 23, 27,  7, 50, 40, 57,
+       31, 51,  4, 24, 21, 14, 17])
 </pre></div>
 </div>
 </div>
@@ -476,53 +478,55 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({np.int64(31): 5,
-         np.int64(14): 4,
-         np.int64(16): 3,
-         np.int64(26): 3,
-         np.int64(36): 3,
-         np.int64(20): 2,
-         np.int64(41): 2,
-         np.int64(0): 2,
-         np.int64(40): 2,
-         np.int64(74): 2,
-         np.int64(3): 2,
-         np.int64(34): 2,
-         np.int64(64): 2,
-         np.int64(37): 2,
-         np.int64(58): 2,
-         np.int64(47): 2,
-         np.int64(55): 2,
-         np.int64(28): 2,
-         np.int64(8): 2,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({np.int64(72): 4,
+         np.int64(4): 3,
+         np.int64(73): 3,
+         np.int64(46): 3,
+         np.int64(71): 3,
+         np.int64(50): 2,
          np.int64(13): 2,
-         np.int64(27): 1,
-         np.int64(72): 1,
-         np.int64(33): 1,
+         np.int64(39): 2,
+         np.int64(1): 2,
+         np.int64(47): 2,
+         np.int64(63): 2,
+         np.int64(16): 2,
+         np.int64(10): 2,
+         np.int64(31): 2,
+         np.int64(38): 2,
+         np.int64(6): 2,
+         np.int64(35): 2,
+         np.int64(3): 2,
+         np.int64(58): 2,
+         np.int64(41): 2,
+         np.int64(26): 1,
          np.int64(52): 1,
-         np.int64(60): 1,
-         np.int64(7): 1,
-         np.int64(46): 1,
-         np.int64(24): 1,
-         np.int64(10): 1,
-         np.int64(62): 1,
-         np.int64(25): 1,
-         np.int64(57): 1,
-         np.int64(2): 1,
          np.int64(23): 1,
-         np.int64(21): 1,
-         np.int64(71): 1,
-         np.int64(1): 1,
-         np.int64(35): 1,
-         np.int64(63): 1,
-         np.int64(65): 1,
+         np.int64(34): 1,
+         np.int64(40): 1,
+         np.int64(44): 1,
+         np.int64(5): 1,
+         np.int64(54): 1,
+         np.int64(0): 1,
+         np.int64(74): 1,
+         np.int64(27): 1,
+         np.int64(30): 1,
+         np.int64(14): 1,
+         np.int64(12): 1,
          np.int64(66): 1,
-         np.int64(38): 1,
-         np.int64(68): 1,
-         np.int64(11): 1,
+         np.int64(56): 1,
+         np.int64(53): 1,
+         np.int64(61): 1,
+         np.int64(18): 1,
+         np.int64(9): 1,
          np.int64(17): 1,
-         np.int64(32): 1,
-         np.int64(50): 1})
+         np.int64(36): 1,
+         np.int64(7): 1,
+         np.int64(43): 1,
+         np.int64(65): 1,
+         np.int64(25): 1,
+         np.int64(55): 1,
+         np.int64(60): 1,
+         np.int64(19): 1})
 </pre></div>
 </div>
 </div>
@@ -546,8 +550,8 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classes distribution in the original data: Counter({np.int64(1): 38, np.int64(0): 37})
-Classes distribution in the bootstrap: Counter({np.int64(0): 49, np.int64(1): 26})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classes distribution in the original data: Counter({np.int64(0): 38, np.int64(1): 37})
+Classes distribution in the bootstrap: Counter({np.int64(1): 38, np.int64(0): 37})
 </pre></div>
 </div>
 </div>
@@ -1260,6 +1264,15 @@ lead to an underfitted forest.</p>
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Decision trees</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="08_ensemble_boosting.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Boosted trees</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
