@@ -10,7 +10,7 @@
       {
         "extension": "./extension",
         "liteExtension": false,
-        "load": "static/remoteEntry.04dfa589925e7e7c6a3d.js",
+        "load": "static/remoteEntry.3922a57136e4fe7d7670.js",
         "name": "@jupyter-notebook/lab-extension",
         "style": "./style"
       },
