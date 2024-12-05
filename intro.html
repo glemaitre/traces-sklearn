@@ -382,13 +382,19 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-version-of-the-course">Executable version of the course</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-using-jupyterlite">Running using JupyterLite</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi-to-run-the-course">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to run the course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-jupyterlite">Use JupyterLite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-conda">Use <code class="docutils literal notranslate"><span class="pre">conda</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniforge">Install <code class="docutils literal notranslate"><span class="pre">miniforge</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-environment">Create the environment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pip">Use <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -442,9 +448,7 @@ If you want to execute the notebooks yourself, refer to the next section.</p>
 </section>
 <section id="executable-version-of-the-course">
 <h2>Executable version of the course<a class="headerlink" href="#executable-version-of-the-course" title="Link to this heading">#</a></h2>
-<p>We offer several ways to run the course locally. The discussion below shows how to
-create a local environment to run the course. For your information, the following
-dependencies are required for the course:</p>
+<p>The following dependencies are required for the course:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">jupyterlab</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">jupytext</span></code></p></li>
@@ -458,8 +462,16 @@ dependencies are required for the course:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">seaborn</span></code></p></li>
 </ul>
-<section id="running-using-jupyterlite">
-<h3>Running using JupyterLite<a class="headerlink" href="#running-using-jupyterlite" title="Link to this heading">#</a></h3>
+<p>We offer several ways to run the course locally. Depending on your favorite package
+manager, you can use one of the following options:</p>
+<ul class="simple">
+<li><p>JupyterLite: if you want to avoid installing anything on your computer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pixi</span></code>: if you want the latest cutting-edge technology.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span></code>: if you want to stick to a more traditional approach.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span></code>: if you want to use the standard Python package manager.</p></li>
+</ul>
+<section id="use-jupyterlite">
+<h3>Use JupyterLite<a class="headerlink" href="#use-jupyterlite" title="Link to this heading">#</a></h3>
 <p>JupyterLite is JupyterLab distribution running in the browser. It uses the Pyodide
 kernel. In short, you can click on the badge below to start the course in your
 browser. The lecture notes are located in <code class="docutils literal notranslate"><span class="pre">content/notebooks</span></code>.</p>
@@ -482,8 +494,8 @@ in addition of the <code class="docutils literal notranslate"><span class="pre">
 some libraries, e.g. importing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> when using <code class="docutils literal notranslate"><span class="pre">pandas</span></code> plot.</p></li>
 </ul>
 </section>
-<section id="use-pixi-to-run-the-course">
-<h3>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to run the course<a class="headerlink" href="#use-pixi-to-run-the-course" title="Link to this heading">#</a></h3>
+<section id="use-pixi">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#use-pixi" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">pixi</span></code> is a package management tool allowing to manage Python environments. Here, you
 see that we have a <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi.lock</span></code> files that specify those environments.</p>
 <section id="install-pixi">
@@ -505,6 +517,32 @@ installation.</p>
 file as notebook, you need to right click on the file and select
 <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">with</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Notebook</span></code>.</p>
 </section>
+</section>
+<section id="use-conda">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">conda</span></code><a class="headerlink" href="#use-conda" title="Link to this heading">#</a></h3>
+<section id="install-miniforge">
+<h4>Install <code class="docutils literal notranslate"><span class="pre">miniforge</span></code><a class="headerlink" href="#install-miniforge" title="Link to this heading">#</a></h4>
+<p>Download and install the latest version of <code class="docutils literal notranslate"><span class="pre">miniforge</span></code> from the <a class="reference external" href="https://conda-forge.org/download/">official
+website</a>.</p>
+</section>
+<section id="create-the-environment">
+<h4>Create the environment<a class="headerlink" href="#create-the-environment" title="Link to this heading">#</a></h4>
+<p>You just have to run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+<p>and then activate the environment with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>traces-sklearn
+</pre></div>
+</div>
+</section>
+</section>
+<section id="use-pip">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#use-pip" title="Link to this heading">#</a></h3>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> and install the dependencies using the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -569,13 +607,19 @@ file as notebook, you need to right click on the file and select
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-version-of-the-course">Executable version of the course</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-using-jupyterlite">Running using JupyterLite</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi-to-run-the-course">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to run the course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-jupyterlite">Use JupyterLite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-conda">Use <code class="docutils literal notranslate"><span class="pre">conda</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniforge">Install <code class="docutils literal notranslate"><span class="pre">miniforge</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-environment">Create the environment</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pip">Use <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
 </ul>
 </li>
 </ul>
