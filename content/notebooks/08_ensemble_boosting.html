@@ -63,6 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/notebooks/08_ensemble_boosting';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Hyperparameters tuning" href="09_hyperparameter_tuning.html" />
     <link rel="prev" title="Bagged trees" href="07_ensemble_bagging.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,6 +184,10 @@
 <li class="toctree-l1"><a class="reference internal" href="06_tree_model.html">Decision trees</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_ensemble_bagging.html">Bagged trees</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Boosted trees</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameter tuning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="09_hyperparameter_tuning.html">Hyperparameters tuning</a></li>
 </ul>
 
     </div>
@@ -1900,15 +1905,15 @@ tree regressors in this classification setting.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7FBB08D97240)],
+                              random_state=RandomState(MT19937) at 0x7FCB32197240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7FBB08D97240)],
+                              random_state=RandomState(MT19937) at 0x7FCB32197240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7FBB08D97240)],
+                              random_state=RandomState(MT19937) at 0x7FCB32197240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7FBB08D97240)],
+                              random_state=RandomState(MT19937) at 0x7FCB32197240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7FBB08D97240)]],
+                              random_state=RandomState(MT19937) at 0x7FCB32197240)]],
       dtype=object)
 </pre></div>
 </div>
@@ -2011,7 +2016,7 @@ gradient boosting algorithm similar to <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.264 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.257 seconds
 </pre></div>
 </div>
 </div>
@@ -2023,7 +2028,7 @@ gradient boosting algorithm similar to <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8084513962820408
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8082057161575629
 </pre></div>
 </div>
 </div>
@@ -2472,7 +2477,7 @@ the model actually used:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>144
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>124
 </pre></div>
 </div>
 </div>
@@ -2521,6 +2526,15 @@ would not improve performance.</p>
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Bagged trees</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="09_hyperparameter_tuning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hyperparameters tuning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

@@ -187,6 +187,10 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Bagged trees</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_ensemble_boosting.html">Boosted trees</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameter tuning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="09_hyperparameter_tuning.html">Hyperparameters tuning</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -460,11 +464,11 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([55, 21, 30, 32, 13, 27, 24,  9, 36, 11, 36, 12, 25,  9,  8, 67, 32,
-       58, 55, 72, 46, 29, 20, 55, 56, 22, 25, 11, 45, 47, 20, 72, 30,  2,
-       11, 39,  3, 63, 48, 63, 74, 72, 59, 11, 53, 31, 29, 55, 45, 11,  7,
-       49, 17, 21, 34, 25, 18, 41, 15, 17, 27, 36, 38, 41,  4, 56, 57,  1,
-        0,  6, 71, 12, 45,  7, 46])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([18, 36, 34, 11, 68, 35, 67, 30, 31, 68, 20, 50, 39, 19, 57,  1, 36,
+       13, 47, 70, 18,  1, 57, 40, 41, 23, 61,  3, 25, 62, 41, 22, 39, 50,
+       70, 19, 12, 24, 59, 46, 28,  6, 72, 74,  5, 32, 62, 36, 51, 56, 12,
+       10, 60, 58, 15, 42, 20,  0, 44, 58, 16, 62, 25, 20,  3,  7, 63, 14,
+       61, 68, 26, 51, 71, 38, 24])
 </pre></div>
 </div>
 </div>
@@ -478,52 +482,53 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({np.int64(59): 4,
-         np.int64(29): 3,
-         np.int64(30): 3,
-         np.int64(72): 3,
-         np.int64(69): 3,
-         np.int64(27): 3,
-         np.int64(68): 3,
-         np.int64(24): 2,
-         np.int64(58): 2,
-         np.int64(43): 2,
-         np.int64(65): 2,
-         np.int64(21): 2,
-         np.int64(7): 2,
-         np.int64(57): 2,
-         np.int64(25): 2,
-         np.int64(35): 2,
-         np.int64(23): 2,
-         np.int64(38): 2,
-         np.int64(39): 2,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({np.int64(22): 5,
+         np.int64(20): 4,
+         np.int64(6): 3,
+         np.int64(14): 3,
+         np.int64(33): 3,
+         np.int64(47): 2,
+         np.int64(16): 2,
+         np.int64(48): 2,
          np.int64(34): 2,
-         np.int64(60): 2,
-         np.int64(22): 1,
-         np.int64(56): 1,
+         np.int64(56): 2,
+         np.int64(38): 2,
+         np.int64(74): 2,
+         np.int64(46): 2,
+         np.int64(24): 2,
+         np.int64(8): 2,
+         np.int64(13): 2,
+         np.int64(66): 2,
+         np.int64(30): 2,
+         np.int64(58): 2,
+         np.int64(61): 2,
+         np.int64(72): 1,
          np.int64(40): 1,
-         np.int64(53): 1,
-         np.int64(50): 1,
-         np.int64(2): 1,
-         np.int64(61): 1,
-         np.int64(36): 1,
-         np.int64(20): 1,
-         np.int64(1): 1,
-         np.int64(54): 1,
-         np.int64(70): 1,
-         np.int64(66): 1,
-         np.int64(15): 1,
-         np.int64(16): 1,
-         np.int64(49): 1,
-         np.int64(31): 1,
-         np.int64(0): 1,
-         np.int64(14): 1,
+         np.int64(59): 1,
+         np.int64(51): 1,
          np.int64(32): 1,
+         np.int64(54): 1,
+         np.int64(68): 1,
+         np.int64(1): 1,
+         np.int64(70): 1,
+         np.int64(36): 1,
+         np.int64(27): 1,
+         np.int64(53): 1,
+         np.int64(17): 1,
+         np.int64(15): 1,
+         np.int64(65): 1,
+         np.int64(73): 1,
+         np.int64(0): 1,
          np.int64(62): 1,
-         np.int64(44): 1,
-         np.int64(47): 1,
-         np.int64(8): 1,
-         np.int64(26): 1})
+         np.int64(43): 1,
+         np.int64(12): 1,
+         np.int64(42): 1,
+         np.int64(41): 1,
+         np.int64(28): 1,
+         np.int64(71): 1,
+         np.int64(49): 1,
+         np.int64(11): 1,
+         np.int64(63): 1})
 </pre></div>
 </div>
 </div>
@@ -547,8 +552,8 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classes distribution in the original data: Counter({np.int64(0): 38, np.int64(1): 37})
-Classes distribution in the bootstrap: Counter({np.int64(1): 38, np.int64(0): 37})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classes distribution in the original data: Counter({np.int64(1): 38, np.int64(0): 37})
+Classes distribution in the bootstrap: Counter({np.int64(0): 40, np.int64(1): 35})
 </pre></div>
 </div>
 </div>
