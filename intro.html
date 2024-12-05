@@ -378,13 +378,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-version-of-the-course">Static version of the course</a><ul class="nav section-nav flex-column">
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-notebooks-locally">Running the notebooks locally</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-version-of-the-course">Executable version of the course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-using-jupyterlite">Running using JupyterLite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi-to-run-the-course">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to run the course</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -402,9 +406,10 @@
 <h1>Introduction to machine learning<a class="headerlink" href="#introduction-to-machine-learning" title="Link to this heading">#</a></h1>
 <p>This tutorial introduces how to use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> to craft predictive models using
 machine learning.</p>
-<section id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://glemaitre.github.io/traces-sklearn/jupyterlite"><img alt="Launch JupyterLite" src="_images/jupyterlite_badge.svg" /></a></p>
+<section id="static-version-of-the-course">
+<h2>Static version of the course<a class="headerlink" href="#static-version-of-the-course" title="Link to this heading">#</a></h2>
+<p>You can preview the course as a JupyterBook. The table of contents is available below.
+If you want to execute the notebooks yourself, refer to the next section.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation 101</span></p>
 <ul>
@@ -435,15 +440,44 @@ machine learning.</p>
 </ul>
 </div>
 </section>
-<section id="running-the-notebooks-locally">
-<h2>Running the notebooks locally<a class="headerlink" href="#running-the-notebooks-locally" title="Link to this heading">#</a></h2>
+<section id="executable-version-of-the-course">
+<h2>Executable version of the course<a class="headerlink" href="#executable-version-of-the-course" title="Link to this heading">#</a></h2>
+<p>We offer several ways to run the course locally.</p>
+<section id="running-using-jupyterlite">
+<h3>Running using JupyterLite<a class="headerlink" href="#running-using-jupyterlite" title="Link to this heading">#</a></h3>
+<p>JupyterLite is JupyterLab distribution running in the browser. It uses the Pyodide
+kernel. In short, you can click on the badge below to start the course in your
+browser. The lecture notes are located in <code class="docutils literal notranslate"><span class="pre">content/notebooks</span></code>.</p>
+<p><a class="reference external" href="https://glemaitre.github.io/traces-sklearn/jupyterlite"><img alt="Launch JupyterLite" src="_images/jupyterlite_badge.svg" /></a></p>
+<p>Here, we describe the pros and cons of this approach.</p>
+<p><strong>Pros</strong>:</p>
+<ul class="simple">
+<li><p>No installation required</p></li>
+<li><p>Fast to start</p></li>
+<li><p>No need to configure Python environment</p></li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul class="simple">
+<li><p>The execution of the first cell is always slow because it requires to potentially
+download the package and intialize the kernel.</p></li>
+<li><p>You will witness that we need to call <code class="docutils literal notranslate"><span class="pre">%pip</span> <span class="pre">install</span></code> to install a couple of packages
+in addition of the <code class="docutils literal notranslate"><span class="pre">import</span></code> statements in the notebook.</p></li>
+<li><p>We need to use <code class="docutils literal notranslate"><span class="pre">pyodide-http</span></code> to load some datasets when fetching from the internet.</p></li>
+<li><p>We need to make some defensive import when those are optional dependencies of
+some libraries, e.g. importing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> when using <code class="docutils literal notranslate"><span class="pre">pandas</span></code> plot.</p></li>
+</ul>
+</section>
+<section id="use-pixi-to-run-the-course">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to run the course<a class="headerlink" href="#use-pixi-to-run-the-course" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pixi</span></code> is a package management tool allowing to manage Python environments. Here, you
+see that we have a <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi.lock</span></code> files that specify those environments.</p>
 <section id="install-pixi">
-<h3>Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#install-pixi" title="Link to this heading">#</a></h3>
+<h4>Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#install-pixi" title="Link to this heading">#</a></h4>
 <p>You can refer to the <a class="reference external" href="https://pixi.sh/latest/#installation">official website</a> for
 installation.</p>
 </section>
 <section id="launching-jupyter-lab">
-<h3>Launching Jupyter Lab<a class="headerlink" href="#launching-jupyter-lab" title="Link to this heading">#</a></h3>
+<h4>Launching Jupyter Lab<a class="headerlink" href="#launching-jupyter-lab" title="Link to this heading">#</a></h4>
 <p>To launch Jupyter Lab, run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>jupyter<span class="w"> </span>lab
 </pre></div>
@@ -451,10 +485,11 @@ installation.</p>
 <p>The Python environment and necessary packages will be automatically installed for you.</p>
 </section>
 <section id="opening-lecture-notes">
-<h3>Opening lecture notes<a class="headerlink" href="#opening-lecture-notes" title="Link to this heading">#</a></h3>
+<h4>Opening lecture notes<a class="headerlink" href="#opening-lecture-notes" title="Link to this heading">#</a></h4>
 <p>The lecture notes are available in the <code class="docutils literal notranslate"><span class="pre">python_files</span></code> directory. To open the Python
 file as notebook, you need to right click on the file and select
 <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">with</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Notebook</span></code>.</p>
+</section>
 </section>
 </section>
 </section>
@@ -515,13 +550,17 @@ file as notebook, you need to right click on the file and select
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-version-of-the-course">Static version of the course</a><ul class="nav section-nav flex-column">
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-notebooks-locally">Running the notebooks locally</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-version-of-the-course">Executable version of the course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-using-jupyterlite">Running using JupyterLite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi-to-run-the-course">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code> to run the course</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
