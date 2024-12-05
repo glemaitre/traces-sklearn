@@ -371,11 +371,9 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-boosting">Introduction to boosting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-decision-trees">Gradient Boosting Decision Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-gradient-boosting-decision-trees">Histogram gradient boosting decision trees</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-introduction-to-kbinsdiscretizer">Short introduction to <code class="docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-decision-trees">Gradient Boosting Decision Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-gradient-boosting-decision-trees">Histogram gradient boosting decision trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#short-introduction-to-kbinsdiscretizer">Short introduction to <code class="docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
 </ul>
 </li>
@@ -1902,15 +1900,15 @@ tree regressors in this classification setting.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F8912573240)],
+                              random_state=RandomState(MT19937) at 0x7F693537F240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F8912573240)],
+                              random_state=RandomState(MT19937) at 0x7F693537F240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F8912573240)],
+                              random_state=RandomState(MT19937) at 0x7F693537F240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F8912573240)],
+                              random_state=RandomState(MT19937) at 0x7F693537F240)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F8912573240)]],
+                              random_state=RandomState(MT19937) at 0x7F693537F240)]],
       dtype=object)
 </pre></div>
 </div>
@@ -1935,14 +1933,13 @@ tree regressors in this classification setting.</p>
 <img alt="../../_images/3e8a731ee9d91ff6bdc4315a5c0ba8cd6e9eb211b60efc90b86ca4aed1cc2d75.png" src="../../_images/3e8a731ee9d91ff6bdc4315a5c0ba8cd6e9eb211b60efc90b86ca4aed1cc2d75.png" />
 </div>
 </div>
+</section>
 <section id="histogram-gradient-boosting-decision-trees">
-<h3>Histogram gradient boosting decision trees<a class="headerlink" href="#histogram-gradient-boosting-decision-trees" title="Link to this heading">#</a></h3>
+<h2>Histogram gradient boosting decision trees<a class="headerlink" href="#histogram-gradient-boosting-decision-trees" title="Link to this heading">#</a></h2>
 <p><strong>EXERCISE:</strong> Accelerate gradient boosting</p>
 <p>What solutions accelerate the training speed of gradient boosting algorithms?</p>
-</section>
-</section>
 <section id="short-introduction-to-kbinsdiscretizer">
-<h2>Short introduction to <code class="docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code><a class="headerlink" href="#short-introduction-to-kbinsdiscretizer" title="Link to this heading">#</a></h2>
+<h3>Short introduction to <code class="docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code><a class="headerlink" href="#short-introduction-to-kbinsdiscretizer" title="Link to this heading">#</a></h3>
 <p>Here’s a trick to accelerate gradient boosting and decision trees in general.
 Decision trees choose splits from all unique values in a feature. Binning
 feature values beforehand reduces the number of potential splits to just the
@@ -2014,7 +2011,7 @@ gradient boosting algorithm similar to <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.224 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.203 seconds
 </pre></div>
 </div>
 </div>
@@ -2026,11 +2023,12 @@ gradient boosting algorithm similar to <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8084513962820408
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8093522234051266
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="hyperparameters">
 <h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">#</a></h3>
 <p>Gradient boosting couples its parameters, so we must set them together. The key
@@ -2474,7 +2472,7 @@ the model actually used:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>137
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>120
 </pre></div>
 </div>
 </div>
@@ -2542,11 +2540,9 @@ would not improve performance.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-boosting">Introduction to boosting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-decision-trees">Gradient Boosting Decision Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-gradient-boosting-decision-trees">Histogram gradient boosting decision trees</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-introduction-to-kbinsdiscretizer">Short introduction to <code class="docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting-decision-trees">Gradient Boosting Decision Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-gradient-boosting-decision-trees">Histogram gradient boosting decision trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#short-introduction-to-kbinsdiscretizer">Short introduction to <code class="docutils literal notranslate"><span class="pre">KBinsDiscretizer</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
 </ul>
 </li>
