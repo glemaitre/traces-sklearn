@@ -386,18 +386,14 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-version-of-the-course">Executable version of the course</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-jupyterlite">Use JupyterLite</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi-conda-or-pip">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-package-manager">Install the package manager</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-dependencies">Install the dependencies</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-conda">Use <code class="docutils literal notranslate"><span class="pre">conda</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniforge">Install <code class="docutils literal notranslate"><span class="pre">miniforge</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-environment">Create the environment</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pip">Use <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -500,14 +496,37 @@ in addition of the <code class="docutils literal notranslate"><span class="pre">
 some libraries, e.g. importing <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> when using <code class="docutils literal notranslate"><span class="pre">pandas</span></code> plot.</p></li>
 </ul>
 </section>
-<section id="use-pixi">
-<h3>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#use-pixi" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">pixi</span></code> is a package management tool allowing to manage Python environments. Here, you
-see that we have a <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">pixi.lock</span></code> files that specify those environments.</p>
-<section id="install-pixi">
-<h4>Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code><a class="headerlink" href="#install-pixi" title="Link to this heading">#</a></h4>
-<p>You can refer to the <a class="reference external" href="https://pixi.sh/latest/#installation">official website</a> for
+<section id="use-pixi-conda-or-pip">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#use-pixi-conda-or-pip" title="Link to this heading">#</a></h3>
+<section id="prerequisites">
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<p>First clone the repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/glemaitre/traces-sklearn.git
+</pre></div>
+</div>
+<p>Alternatively, download an archive at the
+<a class="reference external" href="https://github.com/glemaitre/traces-sklearn/archive/refs/heads/main.zip">following link</a>.</p>
+</section>
+<section id="install-the-package-manager">
+<h4>Install the package manager<a class="headerlink" href="#install-the-package-manager" title="Link to this heading">#</a></h4>
+<p>For <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, refer to the <a class="reference external" href="https://pixi.sh/latest/#installation">official website</a> for
 installation.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">conda</span></code>, download and install the latest version of <code class="docutils literal notranslate"><span class="pre">miniforge</span></code> from the <a class="reference external" href="https://conda-forge.org/download/">official
+website</a>.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">pip</span></code>, it is already installed if you have Python.</p>
+</section>
+<section id="install-the-dependencies">
+<h4>Install the dependencies<a class="headerlink" href="#install-the-dependencies" title="Link to this heading">#</a></h4>
+<p>For <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, you don’t need to do anything. It will be automatically installed in the
+next step.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">conda</span></code>, you can install the dependencies using the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">pip</span></code>, you can install the dependencies using the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
 </section>
 <section id="launching-jupyter-lab">
 <h4>Launching Jupyter Lab<a class="headerlink" href="#launching-jupyter-lab" title="Link to this heading">#</a></h4>
@@ -516,39 +535,33 @@ installation.</p>
 </pre></div>
 </div>
 <p>The Python environment and necessary packages will be automatically installed for you.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">conda</span></code>, you need to activate the environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>traces-sklearn
+</pre></div>
+</div>
+<p>Then, for <code class="docutils literal notranslate"><span class="pre">conda</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code>, you can launch Jupyter Lab with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab
+</pre></div>
+</div>
 </section>
 <section id="opening-lecture-notes">
 <h4>Opening lecture notes<a class="headerlink" href="#opening-lecture-notes" title="Link to this heading">#</a></h4>
 <p>The lecture notes are available in the <code class="docutils literal notranslate"><span class="pre">python_files</span></code> directory. To open the Python
 file as notebook, you need to right click on the file and select
-<code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">with</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Notebook</span></code>.</p>
-</section>
-</section>
-<section id="use-conda">
-<h3>Use <code class="docutils literal notranslate"><span class="pre">conda</span></code><a class="headerlink" href="#use-conda" title="Link to this heading">#</a></h3>
-<section id="install-miniforge">
-<h4>Install <code class="docutils literal notranslate"><span class="pre">miniforge</span></code><a class="headerlink" href="#install-miniforge" title="Link to this heading">#</a></h4>
-<p>Download and install the latest version of <code class="docutils literal notranslate"><span class="pre">miniforge</span></code> from the <a class="reference external" href="https://conda-forge.org/download/">official
-website</a>.</p>
-</section>
-<section id="create-the-environment">
-<h4>Create the environment<a class="headerlink" href="#create-the-environment" title="Link to this heading">#</a></h4>
-<p>You just have to run the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+<code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">with</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">Notebook</span></code>. This is using <code class="docutils literal notranslate"><span class="pre">jupytext</span></code> to interpret those files as
+notebooks.</p>
+<p>Alternatively, you convert those files into notebooks.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, you can run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span>docs<span class="w"> </span>convert-to-notebooks
 </pre></div>
 </div>
-<p>and then activate the environment with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>traces-sklearn
+<p>With <code class="docutils literal notranslate"><span class="pre">conda</span></code> and <code class="docutils literal notranslate"><span class="pre">pip</span></code>, you can run the <code class="docutils literal notranslate"><span class="pre">jupytext</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupytext<span class="w"> </span>--to<span class="w"> </span>notebook<span class="w"> </span>./content/python_files/*.py
+mkdir<span class="w"> </span>-p<span class="w"> </span>./content/notebooks
+mv<span class="w"> </span>./content/python_files/*.ipynb<span class="w"> </span>./content/notebooks
 </pre></div>
 </div>
 </section>
-</section>
-<section id="use-pip">
-<h3>Use <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#use-pip" title="Link to this heading">#</a></h3>
-<p>You can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> and install the dependencies using the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</pre></div>
-</div>
 </section>
 </section>
 </section>
@@ -617,18 +630,14 @@ website</a>.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executable-version-of-the-course">Executable version of the course</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-jupyterlite">Use JupyterLite</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-pixi">Install <code class="docutils literal notranslate"><span class="pre">pixi</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pixi-conda-or-pip">Use <code class="docutils literal notranslate"><span class="pre">pixi</span></code>, <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-package-manager">Install the package manager</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-dependencies">Install the dependencies</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-jupyter-lab">Launching Jupyter Lab</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-lecture-notes">Opening lecture notes</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-conda">Use <code class="docutils literal notranslate"><span class="pre">conda</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-miniforge">Install <code class="docutils literal notranslate"><span class="pre">miniforge</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-environment">Create the environment</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-pip">Use <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
 </ul>
 </li>
 </ul>
