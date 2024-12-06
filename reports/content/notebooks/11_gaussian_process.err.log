@@ -39,7 +39,7 @@ for idx, single_prior in enumerate(y_samples.T):
     )
 
 
-plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 ax.set(
     xlabel="$x$", ylabel="$f(x)$", title="GP prediction using only prior distribution"
 )

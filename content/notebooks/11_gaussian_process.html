@@ -60,10 +60,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/notebooks/10_gaussian_process';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/notebooks/11_gaussian_process';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Hyperparameters tuning" href="09_hyperparameter_tuning.html" />
+    <link rel="prev" title="Quantile regression" href="10_quantile_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -188,8 +190,9 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="09_hyperparameter_tuning.html">Hyperparameters tuning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gaussian process</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predicting with uncertainty</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_quantile_regression.html">Quantile regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Gaussian process</a></li>
 </ul>
 
@@ -262,7 +265,7 @@
       
       
       
-      <li><a href="https://github.com/glemaitre/traces-sklearn/issues/new?title=Issue%20on%20page%20%2Fcontent/notebooks/10_gaussian_process.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/glemaitre/traces-sklearn/issues/new?title=Issue%20on%20page%20%2Fcontent/notebooks/11_gaussian_process.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +295,7 @@
       
       
       
-      <li><a href="../../_sources/content/notebooks/10_gaussian_process.ipynb" target="_blank"
+      <li><a href="../../_sources/content/notebooks/11_gaussian_process.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -380,6 +383,11 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-noise-free-target">Example with noise-free target</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-noisy-targets">Example with noisy targets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-design-a-kernel-for-gaussian-process">Exercise: Design a kernel for Gaussian Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-dataset">Build the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -393,13 +401,11 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="gaussian-process">
 <h1>Gaussian process<a class="headerlink" href="#gaussian-process" title="Link to this heading">#</a></h1>
-<p>All models that we encounter up to know provide a point-estimate at the
-moment of prediction. However, none of the models (apart the
-<code class="docutils literal notranslate"><span class="pre">QuantileRegression</span></code> provide some confidence interval regarding the provided
-predictions.</p>
-<p>A family of model known as Gaussian Process allows to obtain such
-information. In this notebook, we will present the difference of this model
-compare to models that we already presented.</p>
+<p>All models we have encountered so far provide a point-estimate during prediction.
+However, none of these models (except <code class="docutils literal notranslate"><span class="pre">QuantileRegression</span></code>) provide confidence
+intervals for their predictions.</p>
+<p>Gaussian Process models allow us to obtain such information. In this notebook, we
+present how these models differ from the ones we already covered.</p>
 <p>Let’s start by generating a toy dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -447,9 +453,8 @@ compare to models that we already presented.</p>
 </div>
 <section id="example-with-noise-free-target">
 <h2>Example with noise-free target<a class="headerlink" href="#example-with-noise-free-target" title="Link to this heading">#</a></h2>
-<p>In this first example, we will use the true generative process without
-adding any noise. For training the Gaussian Process regression, we will only
-select few samples.</p>
+<p>In this first example, we use the true generative process without adding noise.
+For training the Gaussian Process regression, we select only a few samples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -459,9 +464,9 @@ select few samples.</p>
 </div>
 </div>
 </div>
-<p>The advantage of a Gaussian kernel is that we can craft a kernel by hand and compose
-together some base kernels. Here, we will use a radial basis function (RBF) kernel and
-a constant parameter to fit the amplitude.</p>
+<p>A Gaussian kernel lets us craft a kernel by hand and compose base kernels together.
+Here, we use a radial basis function (RBF) kernel and a constant parameter to fit
+the amplitude.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
@@ -473,13 +478,11 @@ a constant parameter to fit the amplitude.</p>
 </div>
 </div>
 </div>
-<p>In the previous method that we presented, we had a single model where we
-usually try to find the optimal parameters that best fit the dataset. In
-Gaussian Process, the paradigm is different: we deal with a distribution of
-models. We have some <em>apriori</em> defined by the prior distribution of the
-models. The training set will be combined with this prior to provide us a
-posterior distribution of models.</p>
-<p>First, let’s have a look at the prior distribution of our Gaussian process.</p>
+<p>Previous methods we presented used a single model where we find optimal parameters
+that best fit the dataset. Gaussian Process uses a different paradigm: it works with
+a distribution of models. We start with a prior distribution of models. The training
+set combines with this prior to give us a posterior distribution of models.</p>
+<p>First, let’s examine the prior distribution of our Gaussian process.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_samples</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">sample_y</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -495,9 +498,7 @@ posterior distribution of models.</p>
     <span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Sample from the GP prior distribution&quot;</span>
-<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Sample from the GP prior distribution&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -506,10 +507,9 @@ posterior distribution of models.</p>
 <img alt="../../_images/6e630dc1664c55ff81feb788938c984c131bb003d226621c8d17fb25e19424fe.png" src="../../_images/6e630dc1664c55ff81feb788938c984c131bb003d226621c8d17fb25e19424fe.png" />
 </div>
 </div>
-<p>The sample from the prior distribution are just random realisation initially. They are
-far from fitting our true generative model. However, from all the sample, we can
-indeed have a distribution of models. In this case, we can plot the mean and the 95%
-confidence interval.</p>
+<p>The samples from the prior distribution start as random realizations. They differ
+greatly from our true generative model. However, these samples form a distribution
+of models. We plot the mean and the 95% confidence interval.</p>
 <p>mean_prediction, std_prediction = gaussian_process.predict(X, return_std=True)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -534,7 +534,7 @@ confidence interval.</p>
     <span class="p">)</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
     <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;GP prediction using only prior distribution&quot;</span>
 <span class="p">)</span>
@@ -562,13 +562,13 @@ confidence interval.</p>
 <img alt="../../_images/807e1d747e345ebabf9151177f3a2b9d1114005ab3e7fbf3d751c7000efbd813.png" src="../../_images/807e1d747e345ebabf9151177f3a2b9d1114005ab3e7fbf3d751c7000efbd813.png" />
 </div>
 </div>
-<p>Thus, if we plot the true generative process and the prediction, we are far to be
-happy about our modelisation.</p>
+<p>The true generative process and the prediction show we need to improve our model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$f(x) = x \sin(x)$&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mean_prediction</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean prediction&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$f(x) = x \sin(x)$&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mean_prediction</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean prediction&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
     <span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
     <span class="n">mean_prediction</span> <span class="o">-</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">std_prediction</span><span class="p">,</span>
     <span class="n">mean_prediction</span> <span class="o">+</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">std_prediction</span><span class="p">,</span>
@@ -576,14 +576,14 @@ happy about our modelisation.</p>
     <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;95</span><span class="si">% c</span><span class="s2">onfidence interval&quot;</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now, we fit a Gaussian process on these few training samples to see how they will
+<p>Now, we fit a Gaussian process on these few training samples to see how they
 influence the posterior distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -593,56 +593,58 @@ influence the posterior distribution.</p>
 </div>
 </div>
 </div>
-<p>After fitting our model, we see that the hyperparameters of the kernel have been
-optimized. Now, we will use our kernel to compute the mean prediction of the full
-dataset and plot the 95% confidence interval.</p>
+<p>After fitting our model, the hyperparameters of the kernel have been optimized.
+Now, we use our kernel to compute the mean prediction of the full dataset and
+plot the 95% confidence interval.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_prediction</span><span class="p">,</span> <span class="n">std_prediction</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$f(x) = x \sin(x)$&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mean_prediction</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean prediction&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$f(x) = x \sin(x)$&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observations&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mean_prediction</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean prediction&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
     <span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
     <span class="n">mean_prediction</span> <span class="o">-</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">std_prediction</span><span class="p">,</span>
     <span class="n">mean_prediction</span> <span class="o">+</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">std_prediction</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;95</span><span class="si">% c</span><span class="s2">onfidence interval&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gaussian process regression </span><span class="se">\n</span><span class="s2">on noise-free dataset&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Gaussian process regression </span><span class="se">\n</span><span class="s2">on noise-free dataset&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We see that for a prediction made on a data point close to the one from the training
-set, the 95% confidence has a small amplitude. Whenever a sample falls far from
-training data, our model’s prediction is less accurate and the model prediction is
-less precise (higher uncertainty).</p>
+<p>For predictions near training points, the 95% confidence interval shows small
+amplitude. When samples fall far from training data, our model predicts less
+accurately with higher uncertainty.</p>
 </section>
 <section id="example-with-noisy-targets">
 <h2>Example with noisy targets<a class="headerlink" href="#example-with-noisy-targets" title="Link to this heading">#</a></h2>
-<p>We can repeat a similar experiment adding an additional noise to the target this time.
-It will allow seeing the effect of the noise on the fitted model.</p>
-<p>We add some random Gaussian noise to the target with an arbitrary standard deviation.</p>
+<p>We repeat a similar experiment by adding noise to the target. This shows the
+effect of noise on the fitted model.</p>
+<p>We add random Gaussian noise to the target with an arbitrary standard deviation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dy</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dy</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">y_train_noisy</span> <span class="o">=</span> <span class="n">y_train</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We create a similar Gaussian process model. In addition to the kernel, this
-time, we specify the parameter <code class="docutils literal notranslate"><span class="pre">alpha</span></code> which can be interpreted as the
-variance of a Gaussian noise.</p>
+<p>We create a similar Gaussian process model. Along with the kernel, we specify
+the parameter <code class="docutils literal notranslate"><span class="pre">alpha</span></code> which represents the variance of Gaussian noise.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaussian_process</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span>
-    <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">dy</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_restarts_optimizer</span><span class="o">=</span><span class="mi">9</span>
+    <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_restarts_optimizer</span><span class="o">=</span><span class="mi">9</span>
 <span class="p">)</span>
 <span class="n">gaussian_process</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_noisy</span><span class="p">)</span>
 <span class="n">mean_prediction</span><span class="p">,</span> <span class="n">std_prediction</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -650,11 +652,12 @@ variance of a Gaussian noise.</p>
 </div>
 </div>
 </div>
-<p>Let’s plot the mean prediction and the uncertainty region as before.</p>
+<p>Let’s plot the mean prediction and uncertainty region.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$f(x) = x \sin(x)$&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$f(x) = x \sin(x)$&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
     <span class="n">X_train</span><span class="p">,</span>
     <span class="n">y_train_noisy</span><span class="p">,</span>
     <span class="n">dy</span><span class="p">,</span>
@@ -664,8 +667,8 @@ variance of a Gaussian noise.</p>
     <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observations&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mean_prediction</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean prediction&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mean_prediction</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean prediction&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
     <span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
     <span class="n">mean_prediction</span> <span class="o">-</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">std_prediction</span><span class="p">,</span>
     <span class="n">mean_prediction</span> <span class="o">+</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">std_prediction</span><span class="p">,</span>
@@ -673,14 +676,190 @@ variance of a Gaussian noise.</p>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;95</span><span class="si">% c</span><span class="s2">onfidence interval&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gaussian process regression </span><span class="se">\n</span><span class="s2">on a noisy dataset&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Gaussian process regression </span><span class="se">\n</span><span class="s2">on a noisy dataset&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="exercise-design-a-kernel-for-gaussian-process">
+<h2>Exercise: Design a kernel for Gaussian Process<a class="headerlink" href="#exercise-design-a-kernel-for-gaussian-process" title="Link to this heading">#</a></h2>
+<section id="build-the-dataset">
+<h3>Build the dataset<a class="headerlink" href="#build-the-dataset" title="Link to this heading">#</a></h3>
+<p>The Mauna Loa Observatory collects air samples. We want to estimate the CO2
+concentration and extrapolate it for future years. Let’s load the original
+dataset from OpenML.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment this line in JupyterLite</span>
+<span class="o">%</span><span class="k">pip</span> install pyodide-http
+<span class="c1"># import pyodide_http</span>
+<span class="c1"># pyodide_http.patch_all()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_openml</span>
+
+<span class="n">co2</span> <span class="o">=</span> <span class="n">fetch_openml</span><span class="p">(</span><span class="n">data_id</span><span class="o">=</span><span class="mi">41187</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">co2</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we create a date index and select only the CO2 column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">co2_data</span> <span class="o">=</span> <span class="n">co2</span><span class="o">.</span><span class="n">frame</span>
+<span class="n">co2_data</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">co2_data</span><span class="p">[[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">]])</span>
+<span class="n">co2_data</span> <span class="o">=</span> <span class="n">co2_data</span><span class="p">[[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
+<span class="n">co2_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">co2_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data shows CO2 concentration measurements from March 1958 to December 2001.
+Let’s plot this raw information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">co2_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;CO$_2$ concentration (ppm)&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Raw air samples measurements from</span><span class="se">\n</span><span class="s2">the Mauna Loa Observatory&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We take a monthly average and drop months without measurements. This smooths
+the data.</p>
+<p>_, ax = plt.subplots(figsize=(8, 6))
+co2_data = co2_data.resample(“ME”).mean().dropna(axis=”index”, how=”any”)
+co2_data.plot(ax=ax)
+ax.set(
+ylabel=”Monthly average of CO<span class="math notranslate nohighlight">\(_2\)</span> concentration (ppm)”,
+title=(
+“Monthly average of air samples measurements\n from the Mauna Loa Observatory”,
+),
+)
+plt.show()</p>
+<p>We want to predict the CO2 concentration based on the date. We also want to
+extrapolate values for years after 2001.</p>
+<p>First, we split the data and target. We convert the dates into numeric values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">co2_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="n">co2_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">co2_data</span><span class="p">[</span><span class="s2">&quot;co2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_mean</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">y_train</span> <span class="o">-=</span> <span class="n">y_mean</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p>Design a kernel for a Gaussian Process that fits the training data. Then
+extrapolate values up to 2025.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">current_month</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="n">year</span> <span class="o">+</span> <span class="n">today</span><span class="o">.</span><span class="n">month</span> <span class="o">/</span> <span class="mi">12</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1958</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">current_month</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1_000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ExpSineSquared</span><span class="p">,</span>
+    <span class="n">RationalQuadratic</span><span class="p">,</span>
+    <span class="n">WhiteKernel</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">long_term_trend_kernel</span> <span class="o">=</span> <span class="mf">50.0</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">50.0</span><span class="p">)</span>
+<span class="n">seasonal_kernel</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mf">2.0</span><span class="o">**</span><span class="mi">2</span>
+    <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>
+    <span class="o">*</span> <span class="n">ExpSineSquared</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">periodicity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">periodicity_bounds</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">irregularities_kernel</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RationalQuadratic</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">noise_kernel</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">+</span> <span class="n">WhiteKernel</span><span class="p">(</span>
+    <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">noise_level_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e5</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">co2_kernel</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">long_term_trend_kernel</span> <span class="o">+</span> <span class="n">seasonal_kernel</span> <span class="o">+</span> <span class="n">irregularities_kernel</span> <span class="o">+</span> <span class="n">noise_kernel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaussian_process</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">co2_kernel</span><span class="p">,</span> <span class="n">normalize_y</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">gaussian_process</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_y_pred</span><span class="p">,</span> <span class="n">std_y_pred</span> <span class="o">=</span> <span class="n">gaussian_process</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mean_y_pred</span> <span class="o">+=</span> <span class="n">y_mean</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">+</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Measurements&quot;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">mean_y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gaussian process&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">X_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
+    <span class="n">mean_y_pred</span> <span class="o">-</span> <span class="n">std_y_pred</span><span class="p">,</span>
+    <span class="n">mean_y_pred</span> <span class="o">+</span> <span class="n">std_y_pred</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Monthly average of CO$_2$ concentration (ppm)&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s2">&quot;Monthly average of air samples measurements</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;from the Mauna Loa Observatory&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -715,12 +894,12 @@ variance of a Gaussian noise.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="09_hyperparameter_tuning.html"
+       href="10_quantile_regression.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Hyperparameters tuning</p>
+        <p class="prev-next-title">Quantile regression</p>
       </div>
     </a>
 </div>
@@ -742,6 +921,11 @@ variance of a Gaussian noise.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-noise-free-target">Example with noise-free target</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-noisy-targets">Example with noisy targets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-design-a-kernel-for-gaussian-process">Exercise: Design a kernel for Gaussian Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-dataset">Build the dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
