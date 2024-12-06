@@ -191,6 +191,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="09_hyperparameter_tuning.html">Hyperparameters tuning</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gaussian process</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_gaussian_process.html">Gaussian process</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -464,11 +468,11 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 8,  2, 16, 70, 14, 14, 60, 73, 73, 64, 31,  7, 54, 43, 35, 42,  6,
-        1, 71, 47, 12, 16, 11, 72, 16, 24, 43, 14,  8, 25, 47, 74,  9, 38,
-        1, 66,  3, 13, 60, 56,  9,  8, 67, 36, 21, 70, 57,  2, 30,  4,  2,
-       68, 65, 68, 38, 70,  5, 59, 59,  9, 38, 41, 27, 16, 35, 18,  8, 23,
-       67, 39, 33, 20, 40, 65, 41])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([37, 31, 31, 56, 35, 66, 14, 20,  6, 62, 24, 19, 35, 16,  9, 74, 35,
+       70, 11, 39, 48, 63, 27, 23, 71,  9, 54, 19, 22, 35, 34, 49, 29, 23,
+       20, 24, 25, 15, 18, 68, 14, 10, 58,  2, 49, 37, 33, 31, 33, 43, 24,
+       54,  0, 38,  0, 63, 28, 60, 20, 23, 44, 12,  5, 58, 53, 22, 19, 74,
+       35, 52, 52,  7, 46, 32, 24])
 </pre></div>
 </div>
 </div>
@@ -482,49 +486,54 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({np.int64(19): 4,
-         np.int64(46): 3,
-         np.int64(31): 3,
-         np.int64(26): 3,
-         np.int64(24): 3,
-         np.int64(59): 3,
-         np.int64(16): 3,
-         np.int64(13): 3,
-         np.int64(34): 2,
-         np.int64(41): 2,
-         np.int64(37): 2,
-         np.int64(56): 2,
-         np.int64(43): 2,
-         np.int64(3): 2,
-         np.int64(15): 2,
-         np.int64(32): 2,
-         np.int64(10): 2,
-         np.int64(58): 2,
-         np.int64(50): 2,
-         np.int64(22): 2,
-         np.int64(53): 2,
-         np.int64(35): 2,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({np.int64(33): 3,
+         np.int64(6): 3,
+         np.int64(63): 3,
+         np.int64(18): 3,
          np.int64(45): 2,
-         np.int64(29): 1,
-         np.int64(18): 1,
-         np.int64(28): 1,
-         np.int64(52): 1,
+         np.int64(34): 2,
+         np.int64(7): 2,
+         np.int64(56): 2,
+         np.int64(38): 2,
+         np.int64(5): 2,
+         np.int64(37): 2,
+         np.int64(14): 2,
+         np.int64(32): 2,
+         np.int64(58): 2,
+         np.int64(74): 2,
+         np.int64(64): 2,
+         np.int64(29): 2,
+         np.int64(11): 2,
+         np.int64(10): 2,
+         np.int64(27): 2,
+         np.int64(39): 2,
+         np.int64(71): 2,
+         np.int64(54): 2,
+         np.int64(19): 1,
          np.int64(61): 1,
-         np.int64(14): 1,
-         np.int64(68): 1,
-         np.int64(6): 1,
-         np.int64(5): 1,
-         np.int64(8): 1,
-         np.int64(9): 1,
-         np.int64(39): 1,
-         np.int64(40): 1,
-         np.int64(44): 1,
+         np.int64(59): 1,
          np.int64(36): 1,
-         np.int64(25): 1,
-         np.int64(70): 1,
-         np.int64(67): 1,
+         np.int64(8): 1,
+         np.int64(57): 1,
+         np.int64(65): 1,
+         np.int64(26): 1,
+         np.int64(48): 1,
+         np.int64(44): 1,
+         np.int64(55): 1,
+         np.int64(0): 1,
+         np.int64(9): 1,
+         np.int64(15): 1,
+         np.int64(1): 1,
+         np.int64(13): 1,
+         np.int64(41): 1,
+         np.int64(46): 1,
+         np.int64(42): 1,
          np.int64(66): 1,
-         np.int64(21): 1})
+         np.int64(51): 1,
+         np.int64(3): 1,
+         np.int64(25): 1,
+         np.int64(49): 1,
+         np.int64(30): 1})
 </pre></div>
 </div>
 </div>
@@ -548,8 +557,8 @@ We provide the <code class="docutils literal notranslate"><span class="pre">gene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classes distribution in the original data: Counter({np.int64(0): 38, np.int64(1): 37})
-Classes distribution in the bootstrap: Counter({np.int64(0): 44, np.int64(1): 31})
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classes distribution in the original data: Counter({np.int64(1): 38, np.int64(0): 37})
+Classes distribution in the bootstrap: Counter({np.int64(1): 44, np.int64(0): 31})
 </pre></div>
 </div>
 </div>
@@ -1092,9 +1101,8 @@ linear model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">PolynomialFeatures</span>
 
 <span class="n">polynomial_regressor</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
     <span class="n">MinMaxScaler</span><span class="p">(),</span>

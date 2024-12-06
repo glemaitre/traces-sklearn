@@ -189,6 +189,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="09_hyperparameter_tuning.html">Hyperparameters tuning</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gaussian process</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10_gaussian_process.html">Gaussian process</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -1905,15 +1909,15 @@ tree regressors in this classification setting.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F7ED55B7140)],
+                              random_state=RandomState(MT19937) at 0x7FF8E8D9B140)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F7ED55B7140)],
+                              random_state=RandomState(MT19937) at 0x7FF8E8D9B140)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F7ED55B7140)],
+                              random_state=RandomState(MT19937) at 0x7FF8E8D9B140)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F7ED55B7140)],
+                              random_state=RandomState(MT19937) at 0x7FF8E8D9B140)],
        [DecisionTreeRegressor(criterion=&#39;friedman_mse&#39;, max_depth=3,
-                              random_state=RandomState(MT19937) at 0x7F7ED55B7140)]],
+                              random_state=RandomState(MT19937) at 0x7FF8E8D9B140)]],
       dtype=object)
 </pre></div>
 </div>
@@ -2004,6 +2008,7 @@ gradient boosting algorithm similar to <code class="docutils literal notranslate
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">HistGradientBoostingClassifier</span>
 
 <span class="n">clf</span> <span class="o">=</span> <span class="n">HistGradientBoostingClassifier</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -2016,7 +2021,7 @@ gradient boosting algorithm similar to <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.213 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training time: 0.242 seconds
 </pre></div>
 </div>
 </div>
@@ -2028,7 +2033,7 @@ gradient boosting algorithm similar to <code class="docutils literal notranslate
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8098435836540824
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8085332896568668
 </pre></div>
 </div>
 </div>
@@ -2477,7 +2482,7 @@ the model actually used:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>143
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>115
 </pre></div>
 </div>
 </div>
