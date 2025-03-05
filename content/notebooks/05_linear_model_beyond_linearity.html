@@ -16,33 +16,30 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -67,7 +64,6 @@
     <link rel="prev" title="Regularization" href="04_linear_model_regularization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -83,8 +79,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -92,6 +99,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -99,8 +107,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -116,8 +124,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -147,17 +154,21 @@
     
     
     <img src="../../_static/logo.svg" class="logo__image only-light" alt="Introduction to scikit-learn for the TRACES program - Home"/>
-    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Introduction to scikit-learn for the TRACES program - Home"/>
+    <script>document.write(`<img src="../../_static/logo.svg" class="logo__image only-dark" alt="Introduction to scikit-learn for the TRACES program - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -351,16 +362,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -405,8 +424,8 @@ with non-linear relationships between features and targets.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># When using JupyterLite, uncomment and install the `skrub` package.</span>
 <span class="o">%</span><span class="k">pip</span> install skrub
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">skrub</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skrub</span>
 
 <span class="n">skrub</span><span class="o">.</span><span class="n">patch_display</span><span class="p">()</span>  <span class="c1"># makes nice display for pandas tables</span>
 </pre></div>
@@ -427,9 +446,9 @@ with non-linear relationships between features and targets.</p>
 Let’s generate the dataset and plot it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_moons</span>
 
 <span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Feature #0&quot;</span><span class="p">,</span> <span class="s2">&quot;Feature #1&quot;</span><span class="p">]</span>
 <span class="n">target_name</span> <span class="o">=</span> <span class="s2">&quot;class&quot;</span>
@@ -460,7 +479,7 @@ Let’s generate the dataset and plot it.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/54a6f0b0179f53c8b381bf34e77d7ede1d8a40d0d7a55094c5a85459c77bccf9.png" src="../../_images/54a6f0b0179f53c8b381bf34e77d7ede1d8a40d0d7a55094c5a85459c77bccf9.png" />
+<img alt="../../_images/78026dbd2876e5788e9c2f58bf11c1da229def8359db999153aa3132cef4a690.png" src="../../_images/78026dbd2876e5788e9c2f58bf11c1da229def8359db999153aa3132cef4a690.png" />
 </div>
 </div>
 <p>Looking at the dataset, we see that a linear separation cannot effectively
@@ -500,9 +519,9 @@ different training approach than logistic regression. The model finds a hyperpla
 that maximizes the margin to the closest points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s2">&quot;svc&quot;</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">())])</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -512,7 +531,8 @@ that maximizes the margin to the closest points.</p>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: black;
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
   --sklearn-color-line: gray;
   /* Definition of color scheme for unfitted estimators */
   --sklearn-color-unfitted-level-0: #fff5e6;
@@ -657,12 +677,21 @@ clickable and can be expanded/collapsed.
 /* Toggleable label */
 #sk-container-id-1 label.sk-toggleable__label {
   cursor: pointer;
-  display: block;
+  display: flex;
   width: 100%;
   margin-bottom: 0;
   padding: 0.5em;
   box-sizing: border-box;
   text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
 }
 
 #sk-container-id-1 label.sk-toggleable__label-arrow:before {
@@ -815,7 +844,8 @@ a:visited.sk-estimator-doc-link {
   height: 1em;
   width: 1em;
   text-decoration: none !important;
-  margin-left: 1ex;
+  margin-left: 0.5em;
+  text-align: center;
   /* unfitted */
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
   color: var(--sklearn-color-unfitted-level-1);
@@ -914,11 +944,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, LinearSVC())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;Pipeline<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, LinearSVC())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;StandardScaler<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;LinearSVC<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.svm.LinearSVC.html">?<span>Documentation for LinearSVC</span></a></label><div class="sk-toggleable__content fitted"><pre>LinearSVC()</pre></div> </div></div></div></div></div></div></div></div>
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, LinearSVC())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, LinearSVC())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearSVC</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.svm.LinearSVC.html">?<span>Documentation for LinearSVC</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LinearSVC()</pre></div> </div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
 
 <span class="n">display</span> <span class="o">=</span> <span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
 <span class="n">moons</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
@@ -929,7 +959,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9b74268170dc83d4e290e519694d2bce33faf2a11c874da63ae4330781469ef0.png" src="../../_images/9b74268170dc83d4e290e519694d2bce33faf2a11c874da63ae4330781469ef0.png" />
+<img alt="../../_images/170306158091301a6a8597653210ebb2260bae095bc85ad918d85fd3215d69e0.png" src="../../_images/170306158091301a6a8597653210ebb2260bae095bc85ad918d85fd3215d69e0.png" />
 </div>
 </div>
 <p>SVMs become non-linear through the “kernel trick”. This projects data into a higher
@@ -938,7 +968,7 @@ The <code class="docutils literal notranslate"><span class="pre">SVC</span></cod
 similar to the previous pipeline with <code class="docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s2">&quot;svc&quot;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;poly&quot;</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">))])</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -948,7 +978,8 @@ similar to the previous pipeline with <code class="docutils literal notranslate"
 <div class="cell_output docutils container">
 <div class="output text_html"><style>#sk-container-id-2 {
   /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: black;
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
   --sklearn-color-line: gray;
   /* Definition of color scheme for unfitted estimators */
   --sklearn-color-unfitted-level-0: #fff5e6;
@@ -1093,12 +1124,21 @@ clickable and can be expanded/collapsed.
 /* Toggleable label */
 #sk-container-id-2 label.sk-toggleable__label {
   cursor: pointer;
-  display: block;
+  display: flex;
   width: 100%;
   margin-bottom: 0;
   padding: 0.5em;
   box-sizing: border-box;
   text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-2 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
 }
 
 #sk-container-id-2 label.sk-toggleable__label-arrow:before {
@@ -1251,7 +1291,8 @@ a:visited.sk-estimator-doc-link {
   height: 1em;
   width: 1em;
   text-decoration: none !important;
-  margin-left: 1ex;
+  margin-left: 0.5em;
+  text-align: center;
   /* unfitted */
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
   color: var(--sklearn-color-unfitted-level-1);
@@ -1350,7 +1391,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC(kernel=&#x27;poly&#x27;))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;Pipeline<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC(kernel=&#x27;poly&#x27;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;StandardScaler<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;SVC<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.svm.SVC.html">?<span>Documentation for SVC</span></a></label><div class="sk-toggleable__content fitted"><pre>SVC(kernel=&#x27;poly&#x27;)</pre></div> </div></div></div></div></div></div></div></div>
+</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC(kernel=&#x27;poly&#x27;))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC(kernel=&#x27;poly&#x27;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SVC</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.svm.SVC.html">?<span>Documentation for SVC</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SVC(kernel=&#x27;poly&#x27;)</pre></div> </div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1363,13 +1404,13 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ce444d2a6b84b9875c8af04885be7af99a40e3be7300ced1f3294e8ded3be346.png" src="../../_images/ce444d2a6b84b9875c8af04885be7af99a40e3be7300ced1f3294e8ded3be346.png" />
+<img alt="../../_images/641054f268ea49802622bac4cc9feda4a21152208f2859b86fe82362365a7c05.png" src="../../_images/641054f268ea49802622bac4cc9feda4a21152208f2859b86fe82362365a7c05.png" />
 </div>
 </div>
 <p>We can also use other kernel types, like the Radial Basis Function (RBF).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s2">&quot;svc&quot;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">))])</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -1379,7 +1420,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="cell_output docutils container">
 <div class="output text_html"><style>#sk-container-id-3 {
   /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: black;
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
   --sklearn-color-line: gray;
   /* Definition of color scheme for unfitted estimators */
   --sklearn-color-unfitted-level-0: #fff5e6;
@@ -1524,12 +1566,21 @@ clickable and can be expanded/collapsed.
 /* Toggleable label */
 #sk-container-id-3 label.sk-toggleable__label {
   cursor: pointer;
-  display: block;
+  display: flex;
   width: 100%;
   margin-bottom: 0;
   padding: 0.5em;
   box-sizing: border-box;
   text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-3 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
 }
 
 #sk-container-id-3 label.sk-toggleable__label-arrow:before {
@@ -1682,7 +1733,8 @@ a:visited.sk-estimator-doc-link {
   height: 1em;
   width: 1em;
   text-decoration: none !important;
-  margin-left: 1ex;
+  margin-left: 0.5em;
+  text-align: center;
   /* unfitted */
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
   color: var(--sklearn-color-unfitted-level-1);
@@ -1781,7 +1833,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;Pipeline<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;StandardScaler<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;SVC<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.svm.SVC.html">?<span>Documentation for SVC</span></a></label><div class="sk-toggleable__content fitted"><pre>SVC()</pre></div> </div></div></div></div></div></div></div></div>
+</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;scaler&#x27;, StandardScaler()), (&#x27;svc&#x27;, SVC())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SVC</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.svm.SVC.html">?<span>Documentation for SVC</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SVC()</pre></div> </div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1794,15 +1846,15 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f5b832854e68c69a4ded815017d6cae5835f83afc2ae8263cf7d1c2354d8bf06.png" src="../../_images/f5b832854e68c69a4ded815017d6cae5835f83afc2ae8263cf7d1c2354d8bf06.png" />
+<img alt="../../_images/5b16311c6018e836752206a87908eea295afbf388037bd651788d1e08678f59f.png" src="../../_images/5b16311c6018e836752206a87908eea295afbf388037bd651788d1e08678f59f.png" />
 </div>
 </div>
 <p>Note that SVMs do not scale well with large datasets. Sometimes it works better to
 approximate the kernel explicitly with a transformer like <code class="docutils literal notranslate"><span class="pre">Nystroem</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.kernel_approximation</span> <span class="kn">import</span> <span class="n">Nystroem</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.kernel_approximation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Nystroem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
     <span class="p">[(</span><span class="s2">&quot;nystroem&quot;</span><span class="p">,</span> <span class="n">Nystroem</span><span class="p">()),</span> <span class="p">(</span><span class="s2">&quot;logistic_regression&quot;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">())]</span>
@@ -1814,7 +1866,8 @@ approximate the kernel explicitly with a transformer like <code class="docutils 
 <div class="cell_output docutils container">
 <div class="output text_html"><style>#sk-container-id-4 {
   /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: black;
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
   --sklearn-color-line: gray;
   /* Definition of color scheme for unfitted estimators */
   --sklearn-color-unfitted-level-0: #fff5e6;
@@ -1959,12 +2012,21 @@ clickable and can be expanded/collapsed.
 /* Toggleable label */
 #sk-container-id-4 label.sk-toggleable__label {
   cursor: pointer;
-  display: block;
+  display: flex;
   width: 100%;
   margin-bottom: 0;
   padding: 0.5em;
   box-sizing: border-box;
   text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-4 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
 }
 
 #sk-container-id-4 label.sk-toggleable__label-arrow:before {
@@ -2117,7 +2179,8 @@ a:visited.sk-estimator-doc-link {
   height: 1em;
   width: 1em;
   text-decoration: none !important;
-  margin-left: 1ex;
+  margin-left: 0.5em;
+  text-align: center;
   /* unfitted */
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
   color: var(--sklearn-color-unfitted-level-1);
@@ -2217,8 +2280,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   background-color: var(--sklearn-color-fitted-level-3);
 }
 </style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;nystroem&#x27;, Nystroem()),
-                (&#x27;logistic_regression&#x27;, LogisticRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;Pipeline<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;nystroem&#x27;, Nystroem()),
-                (&#x27;logistic_regression&#x27;, LogisticRegression())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;Nystroem<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.kernel_approximation.Nystroem.html">?<span>Documentation for Nystroem</span></a></label><div class="sk-toggleable__content fitted"><pre>Nystroem()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;LogisticRegression<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression()</pre></div> </div></div></div></div></div></div></div></div>
+                (&#x27;logistic_regression&#x27;, LogisticRegression())])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.pipeline.Pipeline.html">?<span>Documentation for Pipeline</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;nystroem&#x27;, Nystroem()),
+                (&#x27;logistic_regression&#x27;, LogisticRegression())])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Nystroem</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.kernel_approximation.Nystroem.html">?<span>Documentation for Nystroem</span></a></div></label><div class="sk-toggleable__content fitted"><pre>Nystroem()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression()</pre></div> </div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2231,7 +2294,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ef19a380f6c80492d876ae4ee411f27be6e80ff16e2ad59aa931526d55337c54.png" src="../../_images/ef19a380f6c80492d876ae4ee411f27be6e80ff16e2ad59aa931526d55337c54.png" />
+<img alt="../../_images/e8f00f8e024111dd98a88b6d4b9c43f78685a46b62cc15877cc22bc7e5e6500a.png" src="../../_images/e8f00f8e024111dd98a88b6d4b9c43f78685a46b62cc15877cc22bc7e5e6500a.png" />
 </div>
 </div>
 <p>The decision boundary looks similar to an SVM with an RBF kernel. Let’s demonstrate
@@ -2266,8 +2329,8 @@ the scaling limitations of SVM classifiers.</p>
 </pre></div>
 </div>
 <div class="output text_html">
-<div id="report_9e37aa24-wrapper" hidden>
-    <template id="report_9e37aa24-template">
+<div id="report_471900bc-wrapper" hidden>
+    <template id="report_471900bc-template">
         <style>
          /*!
 Pure v3.0.0
@@ -3468,7 +3531,7 @@ NOTE: some columns have very strong associations and may be redundant.">
                 
                 
                 <th
-                id="53e5fc89"
+                id="de40c02d"
                 class="table-cell ellided-short "
                 
                 data-role="padding"
@@ -3498,7 +3561,7 @@ data-spans__-1__-1
                 
                 
                 <th
-                id="df698426"
+                id="8135aac6"
                 class="table-cell ellided-short clickable"
                 
                 data-role="columns-level-value"
@@ -3532,7 +3595,7 @@ data-spans__-1__0
                 
                 
                 <th
-                id="7893a403"
+                id="9e8bd7de"
                 class="table-cell ellided-short clickable"
                 
                 data-role="columns-level-value"
@@ -3566,7 +3629,7 @@ data-spans__-1__1
                 
                 
                 <th
-                id="0306d195"
+                id="09d89db8"
                 class="table-cell ellided-short clickable"
                 
                 data-role="columns-level-value"
@@ -3600,7 +3663,7 @@ data-spans__-1__2
                 
                 
                 <th
-                id="57711630"
+                id="65b44d56"
                 class="table-cell ellided-short clickable"
                 
                 data-role="columns-level-value"
@@ -3634,7 +3697,7 @@ data-spans__-1__3
                 
                 
                 <th
-                id="0ac47bcd"
+                id="2237a21e"
                 class="table-cell ellided-short clickable"
                 
                 data-role="columns-level-value"
@@ -3668,7 +3731,7 @@ data-spans__-1__4
                 
                 
                 <th
-                id="59daa929"
+                id="e65c354c"
                 class="table-cell ellided-short clickable"
                 
                 data-role="columns-level-value"
@@ -3716,7 +3779,7 @@ data-spans__-1__5
                 
                 
                 <th
-                id="5d26b8eb"
+                id="db6dbf8a"
                 class="table-cell ellided-short clickable"
                 
                 data-role="index-level-value"
@@ -3744,7 +3807,7 @@ data-spans__0__-1
                 
                 
                 <td
-                id="d68c895c"
+                id="dff4d207"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -3774,7 +3837,7 @@ data-spans__0__0
                 
                 
                 <td
-                id="fdad58f4"
+                id="699c3762"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -3804,7 +3867,7 @@ data-spans__0__1
                 
                 
                 <td
-                id="95e0d91c"
+                id="c633d2d4"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -3834,7 +3897,7 @@ data-spans__0__2
                 
                 
                 <td
-                id="cd8a1b47"
+                id="205fadf7"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -3864,7 +3927,7 @@ data-spans__0__3
                 
                 
                 <td
-                id="0bf05bf2"
+                id="d764f7f8"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -3894,7 +3957,7 @@ data-spans__0__4
                 
                 
                 <td
-                id="959c574b"
+                id="a1cd9e98"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -3928,7 +3991,7 @@ data-spans__0__5
                 
                 
                 <th
-                id="53eff75c"
+                id="a39a9e39"
                 class="table-cell ellided-short clickable"
                 
                 data-role="index-level-value"
@@ -3956,7 +4019,7 @@ data-spans__1__-1
                 
                 
                 <td
-                id="f26a8e63"
+                id="5dad3636"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -3986,7 +4049,7 @@ data-spans__1__0
                 
                 
                 <td
-                id="b4056bc3"
+                id="5686cf23"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4016,7 +4079,7 @@ data-spans__1__1
                 
                 
                 <td
-                id="0cfae76a"
+                id="fdafe5d6"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4046,7 +4109,7 @@ data-spans__1__2
                 
                 
                 <td
-                id="8a831d8e"
+                id="3eb7e773"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4076,7 +4139,7 @@ data-spans__1__3
                 
                 
                 <td
-                id="2df02994"
+                id="df2c6bee"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4106,7 +4169,7 @@ data-spans__1__4
                 
                 
                 <td
-                id="6ff4edff"
+                id="009637cf"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4140,7 +4203,7 @@ data-spans__1__5
                 
                 
                 <th
-                id="84b03069"
+                id="9afa1fc9"
                 class="table-cell ellided-short clickable"
                 
                 data-role="index-level-value"
@@ -4168,7 +4231,7 @@ data-spans__2__-1
                 
                 
                 <td
-                id="9cd46182"
+                id="53d879fe"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4198,7 +4261,7 @@ data-spans__2__0
                 
                 
                 <td
-                id="2bd19f63"
+                id="5a9171c9"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4228,7 +4291,7 @@ data-spans__2__1
                 
                 
                 <td
-                id="ca49d584"
+                id="75951a95"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4258,7 +4321,7 @@ data-spans__2__2
                 
                 
                 <td
-                id="78f6188c"
+                id="3709765d"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4288,7 +4351,7 @@ data-spans__2__3
                 
                 
                 <td
-                id="d241e9b5"
+                id="0fa86c33"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4318,7 +4381,7 @@ data-spans__2__4
                 
                 
                 <td
-                id="aa753f25"
+                id="4a57d48a"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4352,7 +4415,7 @@ data-spans__2__5
                 
                 
                 <th
-                id="715344aa"
+                id="2186b10c"
                 class="table-cell ellided-short clickable"
                 
                 data-role="index-level-value"
@@ -4380,7 +4443,7 @@ data-spans__3__-1
                 
                 
                 <td
-                id="da093275"
+                id="574e3840"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4410,7 +4473,7 @@ data-spans__3__0
                 
                 
                 <td
-                id="565f4122"
+                id="8a345c5f"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4440,7 +4503,7 @@ data-spans__3__1
                 
                 
                 <td
-                id="e8966c2e"
+                id="7758aaf2"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4470,7 +4533,7 @@ data-spans__3__2
                 
                 
                 <td
-                id="a026c258"
+                id="e3ce5e6f"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4500,7 +4563,7 @@ data-spans__3__3
                 
                 
                 <td
-                id="83627db8"
+                id="83bed80b"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4530,7 +4593,7 @@ data-spans__3__4
                 
                 
                 <td
-                id="6d0b4865"
+                id="a62f43c5"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4564,7 +4627,7 @@ data-spans__3__5
                 
                 
                 <th
-                id="a98864a9"
+                id="94aab2f2"
                 class="table-cell ellided-short clickable"
                 
                 data-role="index-level-value"
@@ -4592,7 +4655,7 @@ data-spans__4__-1
                 
                 
                 <td
-                id="f50d102d"
+                id="f4149c55"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4622,7 +4685,7 @@ data-spans__4__0
                 
                 
                 <td
-                id="1b84a278"
+                id="f697d50a"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4652,7 +4715,7 @@ data-spans__4__1
                 
                 
                 <td
-                id="80ce63d0"
+                id="51ef51ec"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4682,7 +4745,7 @@ data-spans__4__2
                 
                 
                 <td
-                id="8545eedb"
+                id="b6e2c90c"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4712,7 +4775,7 @@ data-spans__4__3
                 
                 
                 <td
-                id="b1d362f7"
+                id="5968f556"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4742,7 +4805,7 @@ data-spans__4__4
                 
                 
                 <td
-                id="43e09123"
+                id="9397c322"
                 class="table-cell ellided-short clickable"
                 
                 data-role="dataframe-data"
@@ -4893,11 +4956,11 @@ data-spans__4__5
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.297489</dc:date>
+    <dc:date>2025-03-05T21:32:01.738974</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -4922,7 +4985,7 @@ L 49.739489 79.570647
 L 49.739489 10.999219 
 L 36.64858 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 49.739489 79.570647 
@@ -4930,7 +4993,7 @@ L 62.830398 79.570647
 L 62.830398 79.570647 
 L 49.739489 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 62.830398 79.570647 
@@ -4938,7 +5001,7 @@ L 75.921307 79.570647
 L 75.921307 10.999219 
 L 62.830398 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 75.921307 79.570647 
@@ -4946,7 +5009,7 @@ L 89.012216 79.570647
 L 89.012216 10.999219 
 L 75.921307 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 89.012216 79.570647 
@@ -4954,7 +5017,7 @@ L 102.103125 79.570647
 L 102.103125 79.570647 
 L 89.012216 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 102.103125 79.570647 
@@ -4962,7 +5025,7 @@ L 115.194034 79.570647
 L 115.194034 79.570647 
 L 102.103125 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 115.194034 79.570647 
@@ -4970,7 +5033,7 @@ L 128.284943 79.570647
 L 128.284943 79.570647 
 L 115.194034 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 128.284943 79.570647 
@@ -4978,7 +5041,7 @@ L 141.375852 79.570647
 L 141.375852 10.999219 
 L 128.284943 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 141.375852 79.570647 
@@ -4986,7 +5049,7 @@ L 154.466761 79.570647
 L 154.466761 79.570647 
 L 141.375852 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 154.466761 79.570647 
@@ -4994,42 +5057,42 @@ L 167.55767 79.570647
 L 167.55767 10.999219 
 L 154.466761 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="md694a68438" d="M 0 0 
+       <path id="m8f100dc1e8" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#md694a68438" x="46.71851" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m8f100dc1e8" x="46.71851" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="46.71851" y="94.169085" transform="rotate(-0 46.71851 94.169085)">20</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="46.71851" y="94.169085" transform="rotate(-0 46.71851 94.169085)">20</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#md694a68438" x="97.06816" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m8f100dc1e8" x="97.06816" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="97.06816" y="94.169085" transform="rotate(-0 97.06816 94.169085)">30</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="97.06816" y="94.169085" transform="rotate(-0 97.06816 94.169085)">30</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#md694a68438" x="147.41781" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m8f100dc1e8" x="147.41781" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="147.41781" y="94.169085" transform="rotate(-0 147.41781 94.169085)">40</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="147.41781" y="94.169085" transform="rotate(-0 147.41781 94.169085)">40</text>
      </g>
     </g>
    </g>
@@ -5037,36 +5100,36 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="ma9e7de9c00" d="M 0 0 
+       <path id="m3de85adc7f" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#ma9e7de9c00" x="30.103125" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3de85adc7f" x="30.103125" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="83.369866" transform="rotate(-0 23.103125 83.369866)">0.0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="83.369866" transform="rotate(-0 23.103125 83.369866)">0.0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#ma9e7de9c00" x="30.103125" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3de85adc7f" x="30.103125" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="49.084152" transform="rotate(-0 23.103125 49.084152)">0.5</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="49.084152" transform="rotate(-0 23.103125 49.084152)">0.5</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#ma9e7de9c00" x="30.103125" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3de85adc7f" x="30.103125" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="14.798437" transform="rotate(-0 23.103125 14.798437)">1.0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="14.798437" transform="rotate(-0 23.103125 14.798437)">1.0</text>
      </g>
     </g>
    </g>
@@ -5083,7 +5146,7 @@ L 174.103125 79.570647
   </g>
  </g>
  <defs>
-  <clipPath id="p19cdb8c809">
+  <clipPath id="pd53ecbb185">
    <rect x="30.103125" y="7.570647" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -5177,11 +5240,11 @@ L 174.103125 79.570647
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.343598</dc:date>
+    <dc:date>2025-03-05T21:32:01.786840</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -5206,7 +5269,7 @@ L 40.198864 79.570647
 L 40.198864 45.284933 
 L 27.107955 45.284933 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 40.198864 79.570647 
@@ -5214,7 +5277,7 @@ L 53.289773 79.570647
 L 53.289773 79.570647 
 L 40.198864 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 53.289773 79.570647 
@@ -5222,7 +5285,7 @@ L 66.380682 79.570647
 L 66.380682 79.570647 
 L 53.289773 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 66.380682 79.570647 
@@ -5230,7 +5293,7 @@ L 79.471591 79.570647
 L 79.471591 79.570647 
 L 66.380682 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 79.471591 79.570647 
@@ -5238,7 +5301,7 @@ L 92.5625 79.570647
 L 92.5625 45.284933 
 L 79.471591 45.284933 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 92.5625 79.570647 
@@ -5246,7 +5309,7 @@ L 105.653409 79.570647
 L 105.653409 79.570647 
 L 92.5625 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 105.653409 79.570647 
@@ -5254,7 +5317,7 @@ L 118.744318 79.570647
 L 118.744318 10.999219 
 L 105.653409 10.999219 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 118.744318 79.570647 
@@ -5262,7 +5325,7 @@ L 131.835227 79.570647
 L 131.835227 79.570647 
 L 118.744318 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 131.835227 79.570647 
@@ -5270,7 +5333,7 @@ L 144.926136 79.570647
 L 144.926136 79.570647 
 L 131.835227 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 144.926136 79.570647 
@@ -5278,42 +5341,42 @@ L 158.017045 79.570647
 L 158.017045 45.284933 
 L 144.926136 45.284933 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="mb4ec5f9dfb" d="M 0 0 
+       <path id="m3d71ea9695" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mb4ec5f9dfb" x="53.289773" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3d71ea9695" x="53.289773" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.289773" y="94.169085" transform="rotate(-0 53.289773 94.169085)">8</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.289773" y="94.169085" transform="rotate(-0 53.289773 94.169085)">8</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#mb4ec5f9dfb" x="105.653409" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3d71ea9695" x="105.653409" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="105.653409" y="94.169085" transform="rotate(-0 105.653409 94.169085)">10</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="105.653409" y="94.169085" transform="rotate(-0 105.653409 94.169085)">10</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#mb4ec5f9dfb" x="158.017045" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3d71ea9695" x="158.017045" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="94.169085" transform="rotate(-0 158.017045 94.169085)">12</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="94.169085" transform="rotate(-0 158.017045 94.169085)">12</text>
      </g>
     </g>
    </g>
@@ -5321,36 +5384,36 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="m1042462b77" d="M 0 0 
+       <path id="mfdea759f7e" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m1042462b77" x="20.5625" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mfdea759f7e" x="20.5625" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="83.369866" transform="rotate(-0 13.5625 83.369866)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="83.369866" transform="rotate(-0 13.5625 83.369866)">0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m1042462b77" x="20.5625" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mfdea759f7e" x="20.5625" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="49.084152" transform="rotate(-0 13.5625 49.084152)">1</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="49.084152" transform="rotate(-0 13.5625 49.084152)">1</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m1042462b77" x="20.5625" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mfdea759f7e" x="20.5625" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="14.798437" transform="rotate(-0 13.5625 14.798437)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="14.798437" transform="rotate(-0 13.5625 14.798437)">2</text>
      </g>
     </g>
    </g>
@@ -5367,7 +5430,7 @@ L 164.5625 79.570647
   </g>
  </g>
  <defs>
-  <clipPath id="p38580d9ef2">
+  <clipPath id="pdfb895baba">
    <rect x="20.5625" y="7.570647" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -5463,11 +5526,11 @@ L 164.5625 79.570647
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.391074</dc:date>
+    <dc:date>2025-03-05T21:32:01.836189</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -5492,7 +5555,7 @@ L 33.653409 86.798437
 L 33.653409 86.798437 
 L 20.5625 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 33.653409 86.798437 
@@ -5500,7 +5563,7 @@ L 46.744318 86.798437
 L 46.744318 86.798437 
 L 33.653409 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 46.744318 86.798437 
@@ -5508,7 +5571,7 @@ L 59.835227 86.798437
 L 59.835227 86.798437 
 L 46.744318 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 59.835227 86.798437 
@@ -5516,7 +5579,7 @@ L 72.926136 86.798437
 L 72.926136 86.798437 
 L 59.835227 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 72.926136 86.798437 
@@ -5524,7 +5587,7 @@ L 86.017045 86.798437
 L 86.017045 86.798437 
 L 72.926136 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 86.017045 86.798437 
@@ -5532,7 +5595,7 @@ L 99.107955 86.798437
 L 99.107955 18.227009 
 L 86.017045 18.227009 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 99.107955 86.798437 
@@ -5540,7 +5603,7 @@ L 112.198864 86.798437
 L 112.198864 86.798437 
 L 99.107955 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 112.198864 86.798437 
@@ -5548,7 +5611,7 @@ L 125.289773 86.798437
 L 125.289773 86.798437 
 L 112.198864 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 125.289773 86.798437 
@@ -5556,7 +5619,7 @@ L 138.380682 86.798437
 L 138.380682 86.798437 
 L 125.289773 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 138.380682 86.798437 
@@ -5564,49 +5627,49 @@ L 151.471591 86.798437
 L 151.471591 86.798437 
 L 138.380682 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_12">
     <path d="M 151.471591 86.798437 
 L 151.471591 69.65558 
 L 164.5625 69.65558 
 L 164.5625 86.798437 
-" clip-path="url(#pf576f1fba7)" style="fill: #dd0000"/>
+" clip-path="url(#p81763363f6)" style="fill: #dd0000"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m3732e30a70" d="M 0 0 
+       <path id="m6e825ee153" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m3732e30a70" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6e825ee153" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="20.5625" y="101.396875" transform="rotate(-0 20.5625 101.396875)">−0.5</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="20.5625" y="101.396875" transform="rotate(-0 20.5625 101.396875)">−0.5</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m3732e30a70" x="86.017045" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6e825ee153" x="86.017045" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="86.017045" y="101.396875" transform="rotate(-0 86.017045 101.396875)">0.0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="86.017045" y="101.396875" transform="rotate(-0 86.017045 101.396875)">0.0</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m3732e30a70" x="151.471591" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6e825ee153" x="151.471591" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="151.471591" y="101.396875" transform="rotate(-0 151.471591 101.396875)">0.5</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="151.471591" y="101.396875" transform="rotate(-0 151.471591 101.396875)">0.5</text>
      </g>
     </g>
    </g>
@@ -5614,43 +5677,43 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="m05c6769b19" d="M 0 0 
+       <path id="m1cbdec62e2" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m05c6769b19" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1cbdec62e2" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="90.597656" transform="rotate(-0 13.5625 90.597656)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="90.597656" transform="rotate(-0 13.5625 90.597656)">0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m05c6769b19" x="20.5625" y="52.512723" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1cbdec62e2" x="20.5625" y="52.512723" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="56.311942" transform="rotate(-0 13.5625 56.311942)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="56.311942" transform="rotate(-0 13.5625 56.311942)">2</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m05c6769b19" x="20.5625" y="18.227009" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1cbdec62e2" x="20.5625" y="18.227009" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="22.026228" transform="rotate(-0 13.5625 22.026228)">4</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="22.026228" transform="rotate(-0 13.5625 22.026228)">4</text>
      </g>
     </g>
    </g>
    <g id="line2d_7">
     <path d="M 151.471591 86.798437 
 L 151.471591 18.398437 
-" clip-path="url(#pf576f1fba7)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #dd0000; stroke-width: 1.5"/>
+" clip-path="url(#p81763363f6)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #dd0000; stroke-width: 1.5"/>
    </g>
    <g id="patch_13">
     <path d="M 20.5625 86.798437 
@@ -5663,12 +5726,12 @@ L 164.5625 86.798437
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_7">
-    <text style="fill: #dd0000; font: 700 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="42.1625" y="14.798437" transform="rotate(-0 42.1625 14.798437)">1 outliers (20.0%)</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #dd0000" x="42.1625" y="14.798437" transform="rotate(-0 42.1625 14.798437)">1 outliers (20.0%)</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pf576f1fba7">
+  <clipPath id="p81763363f6">
    <rect x="20.5625" y="14.798437" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -5831,11 +5894,11 @@ L 164.5625 86.798437
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.437898</dc:date>
+    <dc:date>2025-03-05T21:32:01.884529</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -5860,7 +5923,7 @@ L 40.198864 79.2
 L 40.198864 56.342857 
 L 27.107955 56.342857 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 40.198864 79.2 
@@ -5868,7 +5931,7 @@ L 53.289773 79.2
 L 53.289773 79.2 
 L 40.198864 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 53.289773 79.2 
@@ -5876,7 +5939,7 @@ L 66.380682 79.2
 L 66.380682 79.2 
 L 53.289773 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 66.380682 79.2 
@@ -5884,7 +5947,7 @@ L 79.471591 79.2
 L 79.471591 79.2 
 L 66.380682 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 79.471591 79.2 
@@ -5892,7 +5955,7 @@ L 92.5625 79.2
 L 92.5625 79.2 
 L 79.471591 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 92.5625 79.2 
@@ -5900,7 +5963,7 @@ L 105.653409 79.2
 L 105.653409 10.628571 
 L 92.5625 10.628571 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 105.653409 79.2 
@@ -5908,7 +5971,7 @@ L 118.744318 79.2
 L 118.744318 79.2 
 L 105.653409 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 118.744318 79.2 
@@ -5916,7 +5979,7 @@ L 131.835227 79.2
 L 131.835227 79.2 
 L 118.744318 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 131.835227 79.2 
@@ -5924,7 +5987,7 @@ L 144.926136 79.2
 L 144.926136 79.2 
 L 131.835227 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 144.926136 79.2 
@@ -5932,42 +5995,42 @@ L 158.017045 79.2
 L 158.017045 56.342857 
 L 144.926136 56.342857 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m813f2e89c4" d="M 0 0 
+       <path id="m54838b73a2" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m813f2e89c4" x="27.107955" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m54838b73a2" x="27.107955" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="27.107955" y="93.798438" transform="rotate(-0 27.107955 93.798438)">30</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="27.107955" y="93.798438" transform="rotate(-0 27.107955 93.798438)">30</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m813f2e89c4" x="92.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m54838b73a2" x="92.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="92.5625" y="93.798438" transform="rotate(-0 92.5625 93.798438)">40</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="92.5625" y="93.798438" transform="rotate(-0 92.5625 93.798438)">40</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m813f2e89c4" x="158.017045" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m54838b73a2" x="158.017045" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="93.798438" transform="rotate(-0 158.017045 93.798438)">50</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="93.798438" transform="rotate(-0 158.017045 93.798438)">50</text>
      </g>
     </g>
    </g>
@@ -5975,26 +6038,26 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="mf6219d676b" d="M 0 0 
+       <path id="m1afe2aa118" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mf6219d676b" x="20.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1afe2aa118" x="20.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="82.999219" transform="rotate(-0 13.5625 82.999219)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="82.999219" transform="rotate(-0 13.5625 82.999219)">0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#mf6219d676b" x="20.5625" y="33.485714" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1afe2aa118" x="20.5625" y="33.485714" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="37.284933" transform="rotate(-0 13.5625 37.284933)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="37.284933" transform="rotate(-0 13.5625 37.284933)">2</text>
      </g>
     </g>
    </g>
@@ -6011,7 +6074,7 @@ L 164.5625 79.2
   </g>
  </g>
  <defs>
-  <clipPath id="p6cd9c21a46">
+  <clipPath id="p2b526ed11a">
    <rect x="20.5625" y="7.2" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -6086,11 +6149,11 @@ L 164.5625 79.2
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.473410</dc:date>
+    <dc:date>2025-03-05T21:32:01.920963</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -6115,7 +6178,7 @@ L 99.134598 34.690909
 L 99.134598 23.054545 
 L 53.420313 23.054545 
 z
-" clip-path="url(#pc680b7a0ee)" style="fill: #ee854a"/>
+" clip-path="url(#p0c174a4cf9)" style="fill: #ee854a"/>
    </g>
    <g id="patch_3">
     <path d="M 53.420313 20.145455 
@@ -6123,32 +6186,32 @@ L 121.991741 20.145455
 L 121.991741 8.509091 
 L 53.420313 8.509091 
 z
-" clip-path="url(#pc680b7a0ee)" style="fill: #ee854a"/>
+" clip-path="url(#p0c174a4cf9)" style="fill: #ee854a"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m12437b78f1" d="M 0 0 
+       <path id="m120247b755" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m12437b78f1" x="53.420313" y="36" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m120247b755" x="53.420313" y="36" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.420313" y="50.598438" transform="rotate(-0 53.420313 50.598438)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.420313" y="50.598438" transform="rotate(-0 53.420313 50.598438)">0</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m12437b78f1" x="99.134598" y="36" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m120247b755" x="99.134598" y="36" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="99.134598" y="50.598438" transform="rotate(-0 99.134598 50.598438)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="99.134598" y="50.598438" transform="rotate(-0 99.134598 50.598438)">2</text>
      </g>
     </g>
    </g>
@@ -6156,26 +6219,26 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_3">
       <defs>
-       <path id="m96040afafe" d="M 0 0 
+       <path id="me71af633fa" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m96040afafe" x="53.420313" y="28.872727" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me71af633fa" x="53.420313" y="28.872727" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="32.671946" transform="rotate(-0 46.420313 32.671946)"> &gt;50K</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="32.671946" transform="rotate(-0 46.420313 32.671946)"> &gt;50K</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m96040afafe" x="53.420313" y="14.327273" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me71af633fa" x="53.420313" y="14.327273" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="18.126491" transform="rotate(-0 46.420313 18.126491)"> &lt;=50K</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="18.126491" transform="rotate(-0 46.420313 18.126491)"> &lt;=50K</text>
      </g>
     </g>
    </g>
@@ -6190,15 +6253,15 @@ L 125.420312 36
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_5">
-    <text style="font: 8px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="69.134598" y="31.080227" transform="rotate(-0 69.134598 31.080227)"> 40.0%</text>
+    <text style="font-size: 8px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="69.134598" y="31.080227" transform="rotate(-0 69.134598 31.080227)"> 40.0%</text>
    </g>
    <g id="text_6">
-    <text style="font: 8px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="91.991741" y="16.534773" transform="rotate(-0 91.991741 16.534773)"> 60.0%</text>
+    <text style="font-size: 8px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="91.991741" y="16.534773" transform="rotate(-0 91.991741 16.534773)"> 60.0%</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pc680b7a0ee">
+  <clipPath id="p0c174a4cf9">
    <rect x="53.420313" y="7.2" width="72" height="28.8"/>
   </clipPath>
  </defs>
@@ -6965,11 +7028,11 @@ No columns match the selected filter: <strong data-manager="ColumnFilterName"></
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.297489</dc:date>
+    <dc:date>2025-03-05T21:32:01.738974</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -6994,7 +7057,7 @@ L 49.739489 79.570647
 L 49.739489 10.999219 
 L 36.64858 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 49.739489 79.570647 
@@ -7002,7 +7065,7 @@ L 62.830398 79.570647
 L 62.830398 79.570647 
 L 49.739489 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 62.830398 79.570647 
@@ -7010,7 +7073,7 @@ L 75.921307 79.570647
 L 75.921307 10.999219 
 L 62.830398 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 75.921307 79.570647 
@@ -7018,7 +7081,7 @@ L 89.012216 79.570647
 L 89.012216 10.999219 
 L 75.921307 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 89.012216 79.570647 
@@ -7026,7 +7089,7 @@ L 102.103125 79.570647
 L 102.103125 79.570647 
 L 89.012216 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 102.103125 79.570647 
@@ -7034,7 +7097,7 @@ L 115.194034 79.570647
 L 115.194034 79.570647 
 L 102.103125 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 115.194034 79.570647 
@@ -7042,7 +7105,7 @@ L 128.284943 79.570647
 L 128.284943 79.570647 
 L 115.194034 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 128.284943 79.570647 
@@ -7050,7 +7113,7 @@ L 141.375852 79.570647
 L 141.375852 10.999219 
 L 128.284943 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 141.375852 79.570647 
@@ -7058,7 +7121,7 @@ L 154.466761 79.570647
 L 154.466761 79.570647 
 L 141.375852 79.570647 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 154.466761 79.570647 
@@ -7066,42 +7129,42 @@ L 167.55767 79.570647
 L 167.55767 10.999219 
 L 154.466761 10.999219 
 z
-" clip-path="url(#p19cdb8c809)" style="fill: #1f77b4"/>
+" clip-path="url(#pd53ecbb185)" style="fill: #1f77b4"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="md694a68438" d="M 0 0 
+       <path id="m8f100dc1e8" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#md694a68438" x="46.71851" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m8f100dc1e8" x="46.71851" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="46.71851" y="94.169085" transform="rotate(-0 46.71851 94.169085)">20</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="46.71851" y="94.169085" transform="rotate(-0 46.71851 94.169085)">20</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#md694a68438" x="97.06816" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m8f100dc1e8" x="97.06816" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="97.06816" y="94.169085" transform="rotate(-0 97.06816 94.169085)">30</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="97.06816" y="94.169085" transform="rotate(-0 97.06816 94.169085)">30</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#md694a68438" x="147.41781" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m8f100dc1e8" x="147.41781" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="147.41781" y="94.169085" transform="rotate(-0 147.41781 94.169085)">40</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="147.41781" y="94.169085" transform="rotate(-0 147.41781 94.169085)">40</text>
      </g>
     </g>
    </g>
@@ -7109,36 +7172,36 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="ma9e7de9c00" d="M 0 0 
+       <path id="m3de85adc7f" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#ma9e7de9c00" x="30.103125" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3de85adc7f" x="30.103125" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="83.369866" transform="rotate(-0 23.103125 83.369866)">0.0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="83.369866" transform="rotate(-0 23.103125 83.369866)">0.0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#ma9e7de9c00" x="30.103125" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3de85adc7f" x="30.103125" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="49.084152" transform="rotate(-0 23.103125 49.084152)">0.5</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="49.084152" transform="rotate(-0 23.103125 49.084152)">0.5</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#ma9e7de9c00" x="30.103125" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3de85adc7f" x="30.103125" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="14.798437" transform="rotate(-0 23.103125 14.798437)">1.0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="23.103125" y="14.798437" transform="rotate(-0 23.103125 14.798437)">1.0</text>
      </g>
     </g>
    </g>
@@ -7155,7 +7218,7 @@ L 174.103125 79.570647
   </g>
  </g>
  <defs>
-  <clipPath id="p19cdb8c809">
+  <clipPath id="pd53ecbb185">
    <rect x="30.103125" y="7.570647" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -7245,11 +7308,11 @@ L 174.103125 79.570647
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.343598</dc:date>
+    <dc:date>2025-03-05T21:32:01.786840</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -7274,7 +7337,7 @@ L 40.198864 79.570647
 L 40.198864 45.284933 
 L 27.107955 45.284933 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 40.198864 79.570647 
@@ -7282,7 +7345,7 @@ L 53.289773 79.570647
 L 53.289773 79.570647 
 L 40.198864 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 53.289773 79.570647 
@@ -7290,7 +7353,7 @@ L 66.380682 79.570647
 L 66.380682 79.570647 
 L 53.289773 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 66.380682 79.570647 
@@ -7298,7 +7361,7 @@ L 79.471591 79.570647
 L 79.471591 79.570647 
 L 66.380682 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 79.471591 79.570647 
@@ -7306,7 +7369,7 @@ L 92.5625 79.570647
 L 92.5625 45.284933 
 L 79.471591 45.284933 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 92.5625 79.570647 
@@ -7314,7 +7377,7 @@ L 105.653409 79.570647
 L 105.653409 79.570647 
 L 92.5625 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 105.653409 79.570647 
@@ -7322,7 +7385,7 @@ L 118.744318 79.570647
 L 118.744318 10.999219 
 L 105.653409 10.999219 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 118.744318 79.570647 
@@ -7330,7 +7393,7 @@ L 131.835227 79.570647
 L 131.835227 79.570647 
 L 118.744318 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 131.835227 79.570647 
@@ -7338,7 +7401,7 @@ L 144.926136 79.570647
 L 144.926136 79.570647 
 L 131.835227 79.570647 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 144.926136 79.570647 
@@ -7346,42 +7409,42 @@ L 158.017045 79.570647
 L 158.017045 45.284933 
 L 144.926136 45.284933 
 z
-" clip-path="url(#p38580d9ef2)" style="fill: #1f77b4"/>
+" clip-path="url(#pdfb895baba)" style="fill: #1f77b4"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="mb4ec5f9dfb" d="M 0 0 
+       <path id="m3d71ea9695" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mb4ec5f9dfb" x="53.289773" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3d71ea9695" x="53.289773" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.289773" y="94.169085" transform="rotate(-0 53.289773 94.169085)">8</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.289773" y="94.169085" transform="rotate(-0 53.289773 94.169085)">8</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#mb4ec5f9dfb" x="105.653409" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3d71ea9695" x="105.653409" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="105.653409" y="94.169085" transform="rotate(-0 105.653409 94.169085)">10</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="105.653409" y="94.169085" transform="rotate(-0 105.653409 94.169085)">10</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#mb4ec5f9dfb" x="158.017045" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m3d71ea9695" x="158.017045" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="94.169085" transform="rotate(-0 158.017045 94.169085)">12</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="94.169085" transform="rotate(-0 158.017045 94.169085)">12</text>
      </g>
     </g>
    </g>
@@ -7389,36 +7452,36 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="m1042462b77" d="M 0 0 
+       <path id="mfdea759f7e" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m1042462b77" x="20.5625" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mfdea759f7e" x="20.5625" y="79.570647" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="83.369866" transform="rotate(-0 13.5625 83.369866)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="83.369866" transform="rotate(-0 13.5625 83.369866)">0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m1042462b77" x="20.5625" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mfdea759f7e" x="20.5625" y="45.284933" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="49.084152" transform="rotate(-0 13.5625 49.084152)">1</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="49.084152" transform="rotate(-0 13.5625 49.084152)">1</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m1042462b77" x="20.5625" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#mfdea759f7e" x="20.5625" y="10.999219" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="14.798437" transform="rotate(-0 13.5625 14.798437)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="14.798437" transform="rotate(-0 13.5625 14.798437)">2</text>
      </g>
     </g>
    </g>
@@ -7435,7 +7498,7 @@ L 164.5625 79.570647
   </g>
  </g>
  <defs>
-  <clipPath id="p38580d9ef2">
+  <clipPath id="pdfb895baba">
    <rect x="20.5625" y="7.570647" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -7527,11 +7590,11 @@ L 164.5625 79.570647
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.391074</dc:date>
+    <dc:date>2025-03-05T21:32:01.836189</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -7556,7 +7619,7 @@ L 33.653409 86.798437
 L 33.653409 86.798437 
 L 20.5625 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 33.653409 86.798437 
@@ -7564,7 +7627,7 @@ L 46.744318 86.798437
 L 46.744318 86.798437 
 L 33.653409 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 46.744318 86.798437 
@@ -7572,7 +7635,7 @@ L 59.835227 86.798437
 L 59.835227 86.798437 
 L 46.744318 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 59.835227 86.798437 
@@ -7580,7 +7643,7 @@ L 72.926136 86.798437
 L 72.926136 86.798437 
 L 59.835227 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 72.926136 86.798437 
@@ -7588,7 +7651,7 @@ L 86.017045 86.798437
 L 86.017045 86.798437 
 L 72.926136 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 86.017045 86.798437 
@@ -7596,7 +7659,7 @@ L 99.107955 86.798437
 L 99.107955 18.227009 
 L 86.017045 18.227009 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 99.107955 86.798437 
@@ -7604,7 +7667,7 @@ L 112.198864 86.798437
 L 112.198864 86.798437 
 L 99.107955 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 112.198864 86.798437 
@@ -7612,7 +7675,7 @@ L 125.289773 86.798437
 L 125.289773 86.798437 
 L 112.198864 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 125.289773 86.798437 
@@ -7620,7 +7683,7 @@ L 138.380682 86.798437
 L 138.380682 86.798437 
 L 125.289773 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 138.380682 86.798437 
@@ -7628,49 +7691,49 @@ L 151.471591 86.798437
 L 151.471591 86.798437 
 L 138.380682 86.798437 
 z
-" clip-path="url(#pf576f1fba7)" style="fill: #1f77b4"/>
+" clip-path="url(#p81763363f6)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_12">
     <path d="M 151.471591 86.798437 
 L 151.471591 69.65558 
 L 164.5625 69.65558 
 L 164.5625 86.798437 
-" clip-path="url(#pf576f1fba7)" style="fill: #dd0000"/>
+" clip-path="url(#p81763363f6)" style="fill: #dd0000"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m3732e30a70" d="M 0 0 
+       <path id="m6e825ee153" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m3732e30a70" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6e825ee153" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="20.5625" y="101.396875" transform="rotate(-0 20.5625 101.396875)">−0.5</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="20.5625" y="101.396875" transform="rotate(-0 20.5625 101.396875)">−0.5</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m3732e30a70" x="86.017045" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6e825ee153" x="86.017045" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="86.017045" y="101.396875" transform="rotate(-0 86.017045 101.396875)">0.0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="86.017045" y="101.396875" transform="rotate(-0 86.017045 101.396875)">0.0</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m3732e30a70" x="151.471591" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m6e825ee153" x="151.471591" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="151.471591" y="101.396875" transform="rotate(-0 151.471591 101.396875)">0.5</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="151.471591" y="101.396875" transform="rotate(-0 151.471591 101.396875)">0.5</text>
      </g>
     </g>
    </g>
@@ -7678,43 +7741,43 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="m05c6769b19" d="M 0 0 
+       <path id="m1cbdec62e2" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m05c6769b19" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1cbdec62e2" x="20.5625" y="86.798437" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="90.597656" transform="rotate(-0 13.5625 90.597656)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="90.597656" transform="rotate(-0 13.5625 90.597656)">0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#m05c6769b19" x="20.5625" y="52.512723" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1cbdec62e2" x="20.5625" y="52.512723" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="56.311942" transform="rotate(-0 13.5625 56.311942)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="56.311942" transform="rotate(-0 13.5625 56.311942)">2</text>
      </g>
     </g>
     <g id="ytick_3">
      <g id="line2d_6">
       <g>
-       <use xlink:href="#m05c6769b19" x="20.5625" y="18.227009" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1cbdec62e2" x="20.5625" y="18.227009" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_6">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="22.026228" transform="rotate(-0 13.5625 22.026228)">4</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="22.026228" transform="rotate(-0 13.5625 22.026228)">4</text>
      </g>
     </g>
    </g>
    <g id="line2d_7">
     <path d="M 151.471591 86.798437 
 L 151.471591 18.398437 
-" clip-path="url(#pf576f1fba7)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #dd0000; stroke-width: 1.5"/>
+" clip-path="url(#p81763363f6)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #dd0000; stroke-width: 1.5"/>
    </g>
    <g id="patch_13">
     <path d="M 20.5625 86.798437 
@@ -7727,12 +7790,12 @@ L 164.5625 86.798437
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_7">
-    <text style="fill: #dd0000; font: 700 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="42.1625" y="14.798437" transform="rotate(-0 42.1625 14.798437)">1 outliers (20.0%)</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #dd0000" x="42.1625" y="14.798437" transform="rotate(-0 42.1625 14.798437)">1 outliers (20.0%)</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pf576f1fba7">
+  <clipPath id="p81763363f6">
    <rect x="20.5625" y="14.798437" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -7887,11 +7950,11 @@ L 164.5625 86.798437
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.437898</dc:date>
+    <dc:date>2025-03-05T21:32:01.884529</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -7916,7 +7979,7 @@ L 40.198864 79.2
 L 40.198864 56.342857 
 L 27.107955 56.342857 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_3">
     <path d="M 40.198864 79.2 
@@ -7924,7 +7987,7 @@ L 53.289773 79.2
 L 53.289773 79.2 
 L 40.198864 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_4">
     <path d="M 53.289773 79.2 
@@ -7932,7 +7995,7 @@ L 66.380682 79.2
 L 66.380682 79.2 
 L 53.289773 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_5">
     <path d="M 66.380682 79.2 
@@ -7940,7 +8003,7 @@ L 79.471591 79.2
 L 79.471591 79.2 
 L 66.380682 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_6">
     <path d="M 79.471591 79.2 
@@ -7948,7 +8011,7 @@ L 92.5625 79.2
 L 92.5625 79.2 
 L 79.471591 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_7">
     <path d="M 92.5625 79.2 
@@ -7956,7 +8019,7 @@ L 105.653409 79.2
 L 105.653409 10.628571 
 L 92.5625 10.628571 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_8">
     <path d="M 105.653409 79.2 
@@ -7964,7 +8027,7 @@ L 118.744318 79.2
 L 118.744318 79.2 
 L 105.653409 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_9">
     <path d="M 118.744318 79.2 
@@ -7972,7 +8035,7 @@ L 131.835227 79.2
 L 131.835227 79.2 
 L 118.744318 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_10">
     <path d="M 131.835227 79.2 
@@ -7980,7 +8043,7 @@ L 144.926136 79.2
 L 144.926136 79.2 
 L 131.835227 79.2 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="patch_11">
     <path d="M 144.926136 79.2 
@@ -7988,42 +8051,42 @@ L 158.017045 79.2
 L 158.017045 56.342857 
 L 144.926136 56.342857 
 z
-" clip-path="url(#p6cd9c21a46)" style="fill: #1f77b4"/>
+" clip-path="url(#p2b526ed11a)" style="fill: #1f77b4"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m813f2e89c4" d="M 0 0 
+       <path id="m54838b73a2" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m813f2e89c4" x="27.107955" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m54838b73a2" x="27.107955" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="27.107955" y="93.798438" transform="rotate(-0 27.107955 93.798438)">30</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="27.107955" y="93.798438" transform="rotate(-0 27.107955 93.798438)">30</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m813f2e89c4" x="92.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m54838b73a2" x="92.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="92.5625" y="93.798438" transform="rotate(-0 92.5625 93.798438)">40</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="92.5625" y="93.798438" transform="rotate(-0 92.5625 93.798438)">40</text>
      </g>
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use xlink:href="#m813f2e89c4" x="158.017045" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m54838b73a2" x="158.017045" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="93.798438" transform="rotate(-0 158.017045 93.798438)">50</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="158.017045" y="93.798438" transform="rotate(-0 158.017045 93.798438)">50</text>
      </g>
     </g>
    </g>
@@ -8031,26 +8094,26 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_4">
       <defs>
-       <path id="mf6219d676b" d="M 0 0 
+       <path id="m1afe2aa118" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#mf6219d676b" x="20.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1afe2aa118" x="20.5625" y="79.2" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="82.999219" transform="rotate(-0 13.5625 82.999219)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="82.999219" transform="rotate(-0 13.5625 82.999219)">0</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_5">
       <g>
-       <use xlink:href="#mf6219d676b" x="20.5625" y="33.485714" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m1afe2aa118" x="20.5625" y="33.485714" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_5">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="37.284933" transform="rotate(-0 13.5625 37.284933)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="13.5625" y="37.284933" transform="rotate(-0 13.5625 37.284933)">2</text>
      </g>
     </g>
    </g>
@@ -8067,7 +8130,7 @@ L 164.5625 79.2
   </g>
  </g>
  <defs>
-  <clipPath id="p6cd9c21a46">
+  <clipPath id="p2b526ed11a">
    <rect x="20.5625" y="7.2" width="144" height="72"/>
   </clipPath>
  </defs>
@@ -8138,11 +8201,11 @@ L 164.5625 79.2
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2024-12-06T23:41:36.473410</dc:date>
+    <dc:date>2025-03-05T21:32:01.920963</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.9.3, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -8167,7 +8230,7 @@ L 99.134598 34.690909
 L 99.134598 23.054545 
 L 53.420313 23.054545 
 z
-" clip-path="url(#pc680b7a0ee)" style="fill: #ee854a"/>
+" clip-path="url(#p0c174a4cf9)" style="fill: #ee854a"/>
    </g>
    <g id="patch_3">
     <path d="M 53.420313 20.145455 
@@ -8175,32 +8238,32 @@ L 121.991741 20.145455
 L 121.991741 8.509091 
 L 53.420313 8.509091 
 z
-" clip-path="url(#pc680b7a0ee)" style="fill: #ee854a"/>
+" clip-path="url(#p0c174a4cf9)" style="fill: #ee854a"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="m12437b78f1" d="M 0 0 
+       <path id="m120247b755" d="M 0 0 
 L 0 3.5 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m12437b78f1" x="53.420313" y="36" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m120247b755" x="53.420313" y="36" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_1">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.420313" y="50.598438" transform="rotate(-0 53.420313 50.598438)">0</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="53.420313" y="50.598438" transform="rotate(-0 53.420313 50.598438)">0</text>
      </g>
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use xlink:href="#m12437b78f1" x="99.134598" y="36" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#m120247b755" x="99.134598" y="36" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_2">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="99.134598" y="50.598438" transform="rotate(-0 99.134598 50.598438)">2</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="99.134598" y="50.598438" transform="rotate(-0 99.134598 50.598438)">2</text>
      </g>
     </g>
    </g>
@@ -8208,26 +8271,26 @@ L 0 3.5
     <g id="ytick_1">
      <g id="line2d_3">
       <defs>
-       <path id="m96040afafe" d="M 0 0 
+       <path id="me71af633fa" d="M 0 0 
 L -3.5 0 
 " style="stroke: #000000; stroke-width: 0.8"/>
       </defs>
       <g>
-       <use xlink:href="#m96040afafe" x="53.420313" y="28.872727" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me71af633fa" x="53.420313" y="28.872727" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_3">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="32.671946" transform="rotate(-0 46.420313 32.671946)"> &gt;50K</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="32.671946" transform="rotate(-0 46.420313 32.671946)"> &gt;50K</text>
      </g>
     </g>
     <g id="ytick_2">
      <g id="line2d_4">
       <g>
-       <use xlink:href="#m96040afafe" x="53.420313" y="14.327273" style="stroke: #000000; stroke-width: 0.8"/>
+       <use xlink:href="#me71af633fa" x="53.420313" y="14.327273" style="stroke: #000000; stroke-width: 0.8"/>
       </g>
      </g>
      <g id="text_4">
-      <text style="font: 10px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="18.126491" transform="rotate(-0 46.420313 18.126491)"> &lt;=50K</text>
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="46.420313" y="18.126491" transform="rotate(-0 46.420313 18.126491)"> &lt;=50K</text>
      </g>
     </g>
    </g>
@@ -8242,15 +8305,15 @@ L 125.420312 36
 " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_5">
-    <text style="font: 8px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="69.134598" y="31.080227" transform="rotate(-0 69.134598 31.080227)"> 40.0%</text>
+    <text style="font-size: 8px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="69.134598" y="31.080227" transform="rotate(-0 69.134598 31.080227)"> 40.0%</text>
    </g>
    <g id="text_6">
-    <text style="font: 8px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="91.991741" y="16.534773" transform="rotate(-0 91.991741 16.534773)"> 60.0%</text>
+    <text style="font-size: 8px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="91.991741" y="16.534773" transform="rotate(-0 91.991741 16.534773)"> 60.0%</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pc680b7a0ee">
+  <clipPath id="p0c174a4cf9">
    <rect x="53.420313" y="7.2" width="72" height="28.8"/>
   </clipPath>
  </defs>
@@ -8531,7 +8594,7 @@ No columns match the selected filter: <strong data-manager="ColumnFilterName"></
         </div>
     </template>
 
-    <skrub-table-report class="report" id="report_9e37aa24">
+    <skrub-table-report class="report" id="report_471900bc">
     </skrub-table-report>
 
     <script type="module">
@@ -9562,7 +9625,7 @@ No columns match the selected filter: <strong data-manager="ColumnFilterName"></
     </script>
 </div>
 
-<div id="report_9e37aa24-wrapper-fallback">
+<div id="report_471900bc-wrapper-fallback">
     <h2>Please enable javascript</h2>
     <p>
         The skrub table reports need javascript to display correctly. If you are
@@ -9573,8 +9636,8 @@ No columns match the selected filter: <strong data-manager="ColumnFilterName"></
 </div>
 
 <script>
- document.getElementById("report_9e37aa24-wrapper").removeAttribute("hidden");
- document.getElementById("report_9e37aa24-wrapper-fallback").setAttribute("hidden", "");
+ document.getElementById("report_471900bc-wrapper").removeAttribute("hidden");
+ document.getElementById("report_471900bc-wrapper-fallback").setAttribute("hidden", "");
 </script></div></div>
 </div>
 <div class="cell docutils container">
@@ -9671,8 +9734,7 @@ No columns match the selected filter: <strong data-manager="ColumnFilterName"></
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -9731,8 +9793,8 @@ By Guillaume Lemaitre
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

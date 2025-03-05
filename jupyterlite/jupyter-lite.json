@@ -2,7 +2,7 @@
   "jupyter-config-data": {
     "appName": "JupyterLite",
     "appUrl": "./lab",
-    "appVersion": "0.4.4",
+    "appVersion": "0.5.1",
     "baseUrl": "./",
     "defaultKernelName": "python",
     "faviconUrl": "./lab/favicon.ico",
@@ -10,20 +10,20 @@
       {
         "extension": "./extension",
         "liteExtension": false,
-        "load": "static/remoteEntry.3922a57136e4fe7d7670.js",
+        "load": "static/remoteEntry.cad89c571bc2aee4aff2.js",
         "name": "@jupyter-notebook/lab-extension",
         "style": "./style"
       },
       {
         "extension": "./extension",
         "liteExtension": true,
-        "load": "static/remoteEntry.1e551929fc8124706d3a.js",
+        "load": "static/remoteEntry.3ac7f76fb22d01270496.js",
         "name": "@jupyterlite/pyodide-kernel-extension"
       },
       {
         "extension": "./extension",
         "liteExtension": false,
-        "load": "static/remoteEntry.bbfec265851a1c4ecee9.js",
+        "load": "static/remoteEntry.830dc6afdcad96cde79f.js",
         "name": "jupyterlab-jupytext"
       },
       {
@@ -313,9 +313,9 @@
     "litePluginSettings": {
       "@jupyterlite/pyodide-kernel-extension:kernel": {
         "pipliteUrls": [
-          "./extensions/@jupyterlite/pyodide-kernel-extension/static/pypi/all.json?sha256=1e758ca5f33a53f30afd5b0049a42eeabae5daac8e62c57aa9f08a09bfc04484"
+          "./extensions/@jupyterlite/pyodide-kernel-extension/static/pypi/all.json?sha256=8410129b75a5560182e60e67735d1efad22cde00c42736ad5f8841351d33b617"
         ],
-        "pyodideUrl": "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"
+        "pyodideUrl": "https://cdn.jsdelivr.net/pyodide/v0.27.3/full/pyodide.js"
       }
     }
   },
